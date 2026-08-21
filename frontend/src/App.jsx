@@ -113,73 +113,88 @@ function App() {
         </div>
       </section>
 
-      
-    {/* EDITORIAL HERITAGE SPOTLIGHT SECTION */}
-<section style={{ width: '100%', padding: '60px clamp(15px, 4vw, 50px)', borderBottom: '1px solid #222' }}>
-  <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
-    
-    <p style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '10px', fontWeight: 'bold' }}>
-      Horological Milestones
-    </p>
-    <h2 style={{ fontSize: '2.5rem', fontWeight: '300', letterSpacing: '2px', color: '#fff !important', marginBottom: '40px' }}>
-      Icons of the Archive
-    </h2>
 
-    {/* 3-Column Grid for 62MAS, Alpinist, Presage */}
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', width: '100%' }}>
+{/* EDITORIAL HERITAGE SPOTLIGHT SECTION */}
+<section style={{ width: '100%', padding: '80px clamp(20px, 5vw, 60px)', background: '#0f0f0f', borderBottom: '1px solid #222' }}>
+  <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+    
+    {/* Section Header */}
+    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <p style={{ color: '#d4af37', fontSize: '0.85rem', letterSpacing: '5px', textTransform: 'uppercase', marginBottom: '12px', fontWeight: 'bold' }}>
+        Horological Milestones
+      </p>
+      <h2 style={{ fontSize: '2.8rem', fontWeight: '300', letterSpacing: '2px', color: '#fff !important', margin: 0 }}>
+        Icons of the Archive
+      </h2>
+    </div>
+
+    {/* Vertical Stack / Zigzag Editorial Rows */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
       
-      {/* 1. The 62MAS */}
-      <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ width: '100%', height: '240px', background: '#222', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#555' }}>
-          <span>[ 62MAS Image Placeholder ]</span>
+      {/* ITEM 1: The 62MAS (Image Left, Text Right) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
+        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', background: '#141414', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+          <img 
+            src="/images/62MAS.png" 
+            alt="Seiko 62MAS" 
+            style={{ width: '100%', height: '350px', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          />
         </div>
-        <div style={{ padding: '30px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>1965 Diver's Genesis</span>
-            <h3 style={{ fontSize: '1.6rem', color: '#fff !important', margin: '10px 0 15px 0', fontWeight: '400' }}>The 62MAS</h3>
-            <p style={{ color: '#bbb', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '20px' }}>
-              The iconic name "62MAS" is legendary collector slang. It combines the reference prefix **62** (from the Cal. 6217 movement) with **MAS**, an acronym for **auto[MA]tic [S]elfdater**. Released in 1965 as Japan's very first professional dive watch, this moniker stuck because saying the full technical reference was far too clunky.
-            </p>
-          </div>
-          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.85rem', fontStyle: 'italic' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>1965 Diver's Genesis</span>
+          <h3 style={{ fontSize: '2.2rem', color: '#fff !important', margin: '0 0 20px 0', fontWeight: '300', letterSpacing: '1px' }}>The 62MAS</h3>
+          <p style={{ color: '#b0b0b0', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '25px' }}>
+            The iconic name "62MAS" is legendary collector slang combining the reference prefix <strong style={{ color: '#fff' }}>62</strong> (from the Cal. 6217 movement) with <strong style={{ color: '#fff' }}>MAS</strong>, an acronym for <strong style={{ color: '#fff' }}>auto[MA]tic [S]elfdater</strong>. Released in 1965 as Japan's very first professional dive watch.
+          </p>
+          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.9rem', fontStyle: 'italic' }}>
             Significance: The birth of Japanese professional dive tool watches.
           </div>
         </div>
       </div>
 
-      {/* 2. The Alpinist */}
-      <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ width: '100%', height: '240px', background: '#222', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#555' }}>
-          <span>[ Alpinist Image Placeholder ]</span>
-        </div>
-        <div style={{ padding: '30px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>1959 Field Standard</span>
-            <h3 style={{ fontSize: '1.6rem', color: '#fff !important', margin: '10px 0 15px 0', fontWeight: '400' }}>The Alpinist</h3>
-            <p style={{ color: '#bbb', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '20px' }}>
-              First introduced in 1959 as the **Seiko Laurel Alpinist**, this was Seiko's breakthrough entry into purpose-built sports watches. Engineered specifically for Japan's mountain climbers (**Yama-otoko**), it featured mountain-shaped cardinal indexes and protective bund straps to conquer harsh terrain.
-            </p>
-          </div>
-          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.85rem', fontStyle: 'italic' }}>
+      {/* ITEM 2: The Alpinist (Text Left, Image Right - Zigzag) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', order: window.innerWidth > 768 ? 1 : 2 }}>
+          <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>1959 Field Standard</span>
+          <h3 style={{ fontSize: '2.2rem', color: '#fff !important', margin: '0 0 20px 0', fontWeight: '300', letterSpacing: '1px' }}>The Alpinist</h3>
+          <p style={{ color: '#b0b0b0', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '25px' }}>
+            First introduced in 1959 as the <strong style={{ color: '#fff' }}>Seiko Laurel Alpinist</strong>, this was Seiko's breakthrough entry into sports watches. Engineered specifically for Japan's mountain climbers (<strong style={{ color: '#fff' }}>Yama-otoko</strong>), featuring distinct mountain cardinal indexes.
+          </p>
+          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.9rem', fontStyle: 'italic' }}>
             Significance: The definitive blueprint for land navigation and field durability.
           </div>
         </div>
+        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', background: '#141414', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', order: window.innerWidth > 768 ? 2 : 1 }}>
+          <img 
+            src="/images/alpinist.webp" 
+            alt="Seiko Alpinist" 
+            style={{ width: '100%', height: '350px', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          />
+        </div>
       </div>
 
-      {/* 3. The Presage */}
-      <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ width: '100%', height: '240px', background: '#222', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#555' }}>
-          <span>[ Presage Image Placeholder ]</span>
+      {/* ITEM 3: The Presage (Image Left, Text Right) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
+        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', background: '#141414', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+          <img 
+            src="/images/pressage.webp" 
+            alt="Seiko Presage" 
+            style={{ width: '100%', height: '350px', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          />
         </div>
-        <div style={{ padding: '30px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>Craftsmanship & Bar Culture</span>
-            <h3 style={{ fontSize: '1.6rem', color: '#fff !important', margin: '10px 0 15px 0', fontWeight: '400' }}>The Presage Series</h3>
-            <p style={{ color: '#bbb', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '20px' }}>
-              Deeply inspired by the vibrant cocktail lounge culture of Tokyo’s upscale Ginza district—collaborating with legendary mixologists like Hisashi Kishi of STAR BAR—each dial pattern and color palette mimics the light refraction, textures, and hues of artisan cocktails.
-            </p>
-          </div>
-          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.85rem', fontStyle: 'italic' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>Craftsmanship & Bar Culture</span>
+          <h3 style={{ fontSize: '2.2rem', color: '#fff !important', margin: '0 0 20px 0', fontWeight: '300', letterSpacing: '1px' }}>The Presage Series</h3>
+          <p style={{ color: '#b0b0b0', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '25px' }}>
+            Deeply inspired by cocktail lounge culture in Tokyo’s Ginza district—collaborating with legendary mixologists like Hisashi Kishi of STAR BAR—each dial pattern mimics the unique light refraction and textures of artisan cocktails.
+          </p>
+          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.9rem', fontStyle: 'italic' }}>
             Significance: Translating master mixology and Japanese dial artistry into mechanical form.
           </div>
         </div>

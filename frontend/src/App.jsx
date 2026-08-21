@@ -132,12 +132,12 @@ function App() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
       
       {/* ITEM 1: The 62MAS (Image Left, Text Right) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
-        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', background: '#141414', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
+        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', aspectRatio: '16/10' }}>
           <img 
-            src="/images/62MAS.png" 
+            src="/images/62MAS.jpg" 
             alt="Seiko 62MAS" 
-            style={{ width: '100%', height: '350px', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           />
@@ -154,9 +154,9 @@ function App() {
         </div>
       </div>
 
-      {/* ITEM 2: The Alpinist (Text Left, Image Right - Zigzag) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', order: window.innerWidth > 768 ? 1 : 2 }}>
+      {/* ITEM 2: The Alpinist (Text Left, Image Right) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>1959 Field Standard</span>
           <h3 style={{ fontSize: '2.2rem', color: '#fff !important', margin: '0 0 20px 0', fontWeight: '300', letterSpacing: '1px' }}>The Alpinist</h3>
           <p style={{ color: '#b0b0b0', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '25px' }}>
@@ -166,11 +166,11 @@ function App() {
             Significance: The definitive blueprint for land navigation and field durability.
           </div>
         </div>
-        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', background: '#141414', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', order: window.innerWidth > 768 ? 2 : 1 }}>
+        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', aspectRatio: '16/10' }}>
           <img 
             src="/images/alpinist.webp" 
             alt="Seiko Alpinist" 
-            style={{ width: '100%', height: '350px', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           />
@@ -178,12 +178,12 @@ function App() {
       </div>
 
       {/* ITEM 3: The Presage (Image Left, Text Right) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
-        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', background: '#141414', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
+        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', aspectRatio: '16/10' }}>
           <img 
             src="/images/pressage.webp" 
             alt="Seiko Presage" 
-            style={{ width: '100%', height: '350px', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           />
@@ -204,7 +204,6 @@ function App() {
 
   </div>
 </section>
-
       {/* CATALOG SECTION */}
       <main style={{ width: '100%', padding: '20px clamp(15px, 3vw, 40px) 60px clamp(15px, 3vw, 40px)' }}>
         <h2 style={{ fontSize: '1.2rem', marginBottom: '30px', letterSpacing: '1px', color: '#d4af37', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '4px' }}>Features</h2>

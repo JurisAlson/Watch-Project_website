@@ -21,11 +21,14 @@ public class Watch {
     private double purchasePrice;
     private double targetSellingPrice;
 
-    private String status;
+private String status;
 
-    private String imageUrl;
-    private String description;
+@Column(columnDefinition = "TEXT")
+private String imageUrl;
 
-    private LocalDateTime publishedDate;
-    private LocalDateTime soldDate;
+@Column(columnDefinition = "TEXT")
+private String description;
+
+private LocalDateTime publishedDate;
+private LocalDateTime soldDate;
 }

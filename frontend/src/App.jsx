@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Catalog from './Catalog';
+import Admin from './Admin';
+
 
 function Home() {
   const [watches, setWatches] = useState([]);
@@ -381,6 +383,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );

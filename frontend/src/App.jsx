@@ -5,6 +5,47 @@ function App() {
   const [watches, setWatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  
+  // State for the Archive Milestone Slider
+  const [currentMilestone, setCurrentMilestone] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  const archiveMilestones = [
+    {
+      tag: "1965 Diver's Genesis",
+      title: "The Seiko 62MAS Professional",
+      description: "The iconic name combines reference 62 with MAS (automatic selfdater). Engineered as Japan's inaugural professional dive timepiece, it was built specifically to withstand extreme pressure and sub-aquatic environments. Its legendary architecture laid the definitive foundation for generations of robust maritime instruments, merging high-performance utility with timeless mid-century aesthetic elegance.",
+      history: "Launched during an era of rapid technological expansion in Japanese manufacturing, the 62MAS proved that domestic horology could rival European dominance in harsh underwater conditions.",
+      image: "/images/62MAS.jpg"
+    },
+    {
+      tag: "1959 Field Standard",
+      title: "The Seiko Alpinist Heritage Edition",
+      description: "Conceived specifically for Japan's mountain climbers (Yama-otoko) and professional field explorers, featuring distinct structural mountain-peak indexes, highly luminous hands, and rugged case construction. It stands as the ultimate blueprint for land navigation, combining reliable anti-magnetic properties with a sophisticated dial layout designed for high-altitude legibility.",
+      history: "Originally introduced to satisfy the rigorous demands of Japanese mountain guides traversing rugged terrain, the Alpinist line quickly evolved into a cult classic of field functionality.",
+      image: "/images/alpinist.webp"
+    },
+    {
+      tag: "Craftsmanship & Bar Culture",
+      title: "Seiko Presage Cocktail Time",
+      description: "A masterclass in dial geometry, inspired by Tokyo's sophisticated Ginza bar culture in partnership with world-renowned master mixologists. Each intricate sunburst dial pattern mimics the complex light refractions of artisan cocktails and tonics, translating organic fluid elegance into high-precision mechanical art.",
+      history: "Drawing from traditional Japanese artisanal techniques and high-end mechanical watchmaking, the Presage collection bridges everyday wearability with rare aesthetic depth.",
+      image: "/images/pressage.webp"
+    }
+  ];
+
+  // Auto-advance the archive slider every 5.5 seconds with a smooth fade transition
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setCurrentMilestone((prev) => (prev + 1) % archiveMilestones.length);
+        setFade(true);
+      }, 350);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [archiveMilestones.length]);
 
   // Fetch watches from your Java backend when the page loads
   useEffect(() => {
@@ -20,228 +61,313 @@ function App() {
       });
   }, []);
 
-  // Filter watches based on search input
-  const filteredWatches = watches.filter((watch) =>
-    watch.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    watch.modelName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Filter watches based on search input and category selection
+  const filteredWatches = watches.filter((watch) => {
+    const matchesSearch = 
+      watch.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      watch.modelName.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesCategory = 
+      selectedCategory === 'All' || 
+      (watch.category && watch.category.toLowerCase() === selectedCategory.toLowerCase());
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
-    <div style={{ width: '100%', minHeight: '100vh', backgroundColor: '#121212', overflowX: 'hidden' }}>
+    <div className="app-container">
       
-      {/* HEADER SECTION */}
-      <header style={{ borderBottom: '1px solid #222', padding: '20px clamp(15px, 3vw, 40px)', width: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '15px', width: '100%' }}>
-          <h1 style={{ fontSize: '1.8rem', letterSpacing: '2px', margin: 0, fontWeight: 'bold', color: '#fff' }}>GGGG</h1>
+      {/* TRANSPARENT FIXED HEADER & NAV BAR */}
+      <header className="app-header">
+        <div className="header-top-row">
+          <h1 className="header-logo">wala pa po name</h1>
           
           {/* Search Bar */}
-          <div style={{ position: 'relative', flex: '1 1 250px', maxWidth: '400px' }}>
+          <div className="search-container">
             <input
               type="text"
-              placeholder="Search product..."
+              placeholder="Search archive reference..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px 15px',
-                background: 'transparent',
-                border: '1px solid #444',
-                borderRadius: '4px',
-                color: '#fff',
-                outline: 'none',
-              }}
+              className="search-input"
             />
           </div>
 
-          <div style={{ fontSize: '1.2rem', cursor: 'pointer' }}>👤</div>
+          <div className="user-icon">👤</div>
         </div>
 
-        {/* Navigation Links */}
-        <nav style={{ display: 'flex', gap: '30px', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', flexWrap: 'wrap' }}>
-          <span style={{ color: '#fff', borderBottom: '2px solid #fff', paddingBottom: '5px', cursor: 'pointer' }}>Home</span>
-          <span style={{ color: '#888', cursor: 'pointer' }}>Catalog</span>
-          <span style={{ color: '#888', cursor: 'pointer' }}>Contact</span>
-          <span style={{ color: '#888', cursor: 'pointer' }}>About Us</span>
+        {/* Minimalist Navigation Links */}
+        <nav className="nav-links">
+          <span className="nav-link active">HOME</span>
+          <span className="nav-link">Catalog</span>
+          <span className="nav-link">Contact</span>
+          <span className="nav-link">About us</span>
         </nav>
       </header>
 
-      {/* EDITORIAL 3-VIDEO HERO SECTION */}
-      <section style={{ width: '100%', padding: '30px clamp(15px, 3vw, 40px)' }}>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-          gap: '20px', 
-          width: '100%'
-        }}>
-          
-          {/* Video 1 */}
-          <div style={{ position: 'relative', height: '480px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #333', background: '#000', width: '100%' }}>
-            <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8) contrast(1.1)' }}>
-              <source src="/Video_1.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div style={{ position: 'absolute', bottom: '30px', left: '30px', zIndex: 2 }}>
-              <p style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '4px', textTransform: 'uppercase', margin: '0 0 6px 0', fontWeight: 'bold' }}>CURATED HOROLOGY</p>
-              <h2 style={{ fontSize: '1.8rem', letterSpacing: '2px', margin: 0, fontWeight: '300', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>EXCEPTIONAL</h2>
+      <div className="content-wrapper">
+
+        {/* EDITORIAL 3-VIDEO HERO SECTION */}
+        <section className="hero-section">
+          <div className="hero-grid">
+            
+            {/* Video 1 */}
+            <div className="hero-card">
+              <video autoPlay loop muted playsInline className="hero-video">
+                <source src="/Video_1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="hero-overlay-text">
+                <p className="hero-tag">CURATED HOROLOGY</p>
+                <h2 className="hero-title">EXCEPTIONAL</h2>
+              </div>
             </div>
-          </div>
 
-          {/* Video 2 */}
-          <div style={{ position: 'relative', height: '480px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #333', background: '#000', width: '100%' }}>
-            <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8) contrast(1.1)' }}>
-              <source src="/Video_3.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div style={{ position: 'absolute', bottom: '30px', left: '30px', zIndex: 2 }}>
-              <p style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '4px', textTransform: 'uppercase', margin: '0 0 6px 0', fontWeight: 'bold' }}>PRECISION</p>
-              <h2 style={{ fontSize: '1.8rem', letterSpacing: '2px', margin: 0, fontWeight: '300', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>TIMEPIECES</h2>
+            {/* Video 2 */}
+            <div className="hero-card">
+              <video autoPlay loop muted playsInline className="hero-video">
+                <source src="/Video_3.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="hero-overlay-text">
+                <p className="hero-tag">PRECISION</p>
+                <h2 className="hero-title">TIMEPIECES</h2>
+              </div>
             </div>
-          </div>
 
-          {/* Video 3 */}
-          <div style={{ position: 'relative', height: '480px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #333', background: '#000', width: '100%' }}>
-            <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8) contrast(1.1)' }}>
-              <source src="/Video_2.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div style={{ position: 'absolute', bottom: '30px', left: '30px', zIndex: 2 }}>
-              <p style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '4px', textTransform: 'uppercase', margin: '0 0 6px 0', fontWeight: 'bold' }}>ARCHIVE</p>
-              <h2 style={{ fontSize: '1.8rem', letterSpacing: '2px', margin: 0, fontWeight: '300', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>COLLECTION 2026</h2>
+            {/* Video 3 */}
+            <div className="hero-card">
+              <video autoPlay loop muted playsInline className="hero-video">
+                <source src="/Video_2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="hero-overlay-text">
+                <p className="hero-tag">ARCHIVE</p>
+                <h2 className="hero-title">COLLECTION 2026</h2>
+              </div>
             </div>
+
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* ENLARGED ARCHIVE SLIDER SECTION */}
+        <section className="archive-slider-section">
+          <div className="archive-container">
+            
+            <div className="section-header-center">
+              <p className="gold-tag">Horological Milestones</p>
+              <h2 className="section-heading">Icons of the Archive</h2>
+            </div>
 
-
-{/* EDITORIAL HERITAGE SPOTLIGHT SECTION */}
-<section style={{ width: '100%', padding: '80px clamp(20px, 5vw, 60px)', background: '#0f0f0f', borderBottom: '1px solid #222' }}>
-  <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
-    
-    {/* Section Header */}
-    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-      <p style={{ color: '#d4af37', fontSize: '0.85rem', letterSpacing: '5px', textTransform: 'uppercase', marginBottom: '12px', fontWeight: 'bold' }}>
-        Horological Milestones
-      </p>
-      <h2 style={{ fontSize: '2.8rem', fontWeight: '300', letterSpacing: '2px', color: '#fff !important', margin: 0 }}>
-        Icons of the Archive
-      </h2>
-    </div>
-
-    {/* Vertical Stack / Zigzag Editorial Rows */}
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
-      
-      {/* ITEM 1: The 62MAS (Image Left, Text Right) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
-        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', aspectRatio: '16/10' }}>
-          <img 
-            src="/images/62MAS.jpg" 
-            alt="Seiko 62MAS" 
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>1965 Diver's Genesis</span>
-          <h3 style={{ fontSize: '2.2rem', color: '#fff !important', margin: '0 0 20px 0', fontWeight: '300', letterSpacing: '1px' }}>The 62MAS</h3>
-          <p style={{ color: '#b0b0b0', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '25px' }}>
-            The iconic name "62MAS" is legendary collector slang combining the reference prefix <strong style={{ color: '#fff' }}>62</strong> (from the Cal. 6217 movement) with <strong style={{ color: '#fff' }}>MAS</strong>, an acronym for <strong style={{ color: '#fff' }}>auto[MA]tic [S]elfdater</strong>. Released in 1965 as Japan's very first professional dive watch.
-          </p>
-          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.9rem', fontStyle: 'italic' }}>
-            Significance: The birth of Japanese professional dive tool watches.
-          </div>
-        </div>
-      </div>
-
-      {/* ITEM 2: The Alpinist (Text Left, Image Right) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>1959 Field Standard</span>
-          <h3 style={{ fontSize: '2.2rem', color: '#fff !important', margin: '0 0 20px 0', fontWeight: '300', letterSpacing: '1px' }}>The Alpinist</h3>
-          <p style={{ color: '#b0b0b0', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '25px' }}>
-            First introduced in 1959 as the <strong style={{ color: '#fff' }}>Seiko Laurel Alpinist</strong>, this was Seiko's breakthrough entry into sports watches. Engineered specifically for Japan's mountain climbers (<strong style={{ color: '#fff' }}>Yama-otoko</strong>), featuring distinct mountain cardinal indexes.
-          </p>
-          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.9rem', fontStyle: 'italic' }}>
-            Significance: The definitive blueprint for land navigation and field durability.
-          </div>
-        </div>
-        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', aspectRatio: '16/10' }}>
-          <img 
-            src="/images/alpinist.webp" 
-            alt="Seiko Alpinist" 
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          />
-        </div>
-      </div>
-
-      {/* ITEM 3: The Presage (Image Left, Text Right) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
-        <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #262626', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', aspectRatio: '16/10' }}>
-          <img 
-            src="/images/pressage.webp" 
-            alt="Seiko Presage" 
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <span style={{ color: '#d4af37', fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>Craftsmanship & Bar Culture</span>
-          <h3 style={{ fontSize: '2.2rem', color: '#fff !important', margin: '0 0 20px 0', fontWeight: '300', letterSpacing: '1px' }}>The Presage Series</h3>
-          <p style={{ color: '#b0b0b0', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '25px' }}>
-            Deeply inspired by cocktail lounge culture in Tokyo’s Ginza district—collaborating with legendary mixologists like Hisashi Kishi of STAR BAR—each dial pattern mimics the unique light refraction and textures of artisan cocktails.
-          </p>
-          <div style={{ borderLeft: '2px solid #d4af37', paddingLeft: '15px', color: '#888', fontSize: '0.9rem', fontStyle: 'italic' }}>
-            Significance: Translating master mixology and Japanese dial artistry into mechanical form.
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-      {/* CATALOG SECTION */}
-      <main style={{ width: '100%', padding: '20px clamp(15px, 3vw, 40px) 60px clamp(15px, 3vw, 40px)' }}>
-        <h2 style={{ fontSize: '1.2rem', marginBottom: '30px', letterSpacing: '1px', color: '#d4af37', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '4px' }}>Features</h2>
-
-        {loading ? (
-          <p style={{ color: '#888' }}>Loading catalog inventory from server...</p>
-        ) : filteredWatches.length === 0 ? (
-          <div style={{ padding: '40px', background: '#1a1a1a', borderRadius: '6px', textAlign: 'center', border: '1px solid #333', width: '100%' }}>
-            <p style={{ color: '#aaa', fontSize: '1.1rem' }}>No timepieces found.</p>
-            <p style={{ color: '#666', fontSize: '0.9rem' }}>Add watch data to your database to view them here.</p>
-          </div>
-        ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '30px', width: '100%' }}>
-            {filteredWatches.map((watch) => (
-              <div key={watch.id} style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '6px', overflow: 'hidden', transition: 'transform 0.2s', width: '100%' }}>
+            <div className="archive-slider-box">
+              <div className="archive-grid">
                 
-                {/* Watch Image Placeholder */}
-                <div style={{ width: '100%', height: '220px', background: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#555', fontSize: '0.9rem', borderBottom: '1px solid #333' }}>
-                  {watch.imageUrl ? (
-                    <img src={watch.imageUrl} alt={watch.modelName} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  ) : (
-                    <span>[ Watch Image Placeholder ]</span>
-                  )}
+                {/* Larger Image Area */}
+                <div className="archive-image-wrapper">
+                  <img 
+                    src={archiveMilestones[currentMilestone].image} 
+                    alt={archiveMilestones[currentMilestone].title} 
+                    className={`archive-img ${fade ? 'fade-in' : 'fade-out'}`}
+                  />
                 </div>
 
-                {/* Watch Information */}
-                <div style={{ padding: '20px' }}>
-                  <h3 style={{ margin: '0 0 8px 0', fontSize: '1.2rem', color: '#fff' }}>{watch.brand}</h3>
-                  <p style={{ margin: '4px 0', color: '#aaa', fontSize: '0.95rem' }}>{watch.modelName}</p>
-                  <p style={{ margin: '12px 0 4px 0', color: '#d4af37', fontSize: '1.3rem', fontWeight: 'bold' }}>${watch.targetSellingPrice}</p>
-                  <p style={{ margin: '0', color: '#666', fontSize: '0.8rem' }}>Ref: {watch.referenceNumber} | Status: {watch.status}</p>
+                {/* Educational Text & History Side */}
+                <div className={`archive-text-wrapper ${fade ? 'fade-in' : 'fade-out'}`}>
+                  <span className="gold-tag">{archiveMilestones[currentMilestone].tag}</span>
+                  <h3 className="archive-item-title">{archiveMilestones[currentMilestone].title}</h3>
+                  <p className="archive-desc">{archiveMilestones[currentMilestone].description}</p>
+                  <p className="archive-history">{archiveMilestones[currentMilestone].history}</p>
+
+                  {/* Slider Pagination Indicators */}
+                  <div className="slider-indicators">
+                    {archiveMilestones.map((_, idx) => (
+                      <span 
+                        key={idx}
+                        onClick={() => {
+                          setFade(false);
+                          setTimeout(() => {
+                            setCurrentMilestone(idx);
+                            setFade(true);
+                          }, 350);
+                        }}
+                        className={`indicator-dot ${currentMilestone === idx ? 'active' : ''}`}
+                      />
+                    ))}
+                  </div>
                 </div>
 
               </div>
-            ))}
+            </div>
+
           </div>
-        )}
-      </main>
+        </section>
+
+        {/* SERVICES BANNER SECTION */}
+        <section className="services-banner">
+          <div className="services-container">
+            <p className="gold-tag">Our Services</p>
+            <h3 className="services-title">Consignment, Trade, Buy & Sell</h3>
+            <p className="services-desc">
+              We facilitate seamless transactions through trusted watch trading, direct acquisitions, and professional consignment services—primarily dealing with exquisite Seiko timepieces for enthusiasts and collectors.
+            </p>
+          </div>
+        </section>
+
+        {/* SERIES FILTER SELECTION CARDS (ICONS RETURNED TO WHITE) */}
+        <section className="filter-section">
+          <div className="filter-wrapper">
+            <div className="filter-header-row">
+              <div>
+                <p className="gold-tag">Explore Collections</p>
+                <h2 className="filter-main-title">Shop by Series</h2>
+              </div>
+              {selectedCategory !== 'All' && (
+                <button onClick={() => setSelectedCategory('All')} className="reset-filter-btn">
+                  Reset Filter ({selectedCategory})
+                </button>
+              )}
+            </div>
+
+            <div className="filter-cards-grid">
+              
+              {/* Prospex Card */}
+              <div 
+                onClick={() => setSelectedCategory('Prospex')}
+                className={`filter-card ${selectedCategory === 'Prospex' ? 'selected' : ''}`}
+              >
+                <img src="/images/prospex_logo.png" alt="Prospex" className="filter-card-logo" />
+              </div>
+
+              {/* Presage Card */}
+              <div 
+                onClick={() => setSelectedCategory('Presage')}
+                className={`filter-card ${selectedCategory === 'Presage' ? 'selected' : ''}`}
+              >
+                <img src="/images/pressage_logo.webp" alt="Presage" className="filter-card-logo" />
+              </div>
+
+              {/* Seiko 5 Card */}
+              <div 
+                onClick={() => setSelectedCategory('Seiko 5')}
+                className={`filter-card ${selectedCategory === 'Seiko 5' ? 'selected' : ''}`}
+              >
+                <img src="/images/seiko_5.png" alt="Seiko 5 Sports" className="filter-card-logo" />
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* GRID INVENTORY SHOWCASE (REMOVED ONE-LINE RESTRICTION) */}
+        <main className="inventory-section">
+          <div className="inventory-header-row">
+            <h2 className="inventory-title">
+              {selectedCategory === 'All' ? 'Curated Inventory Showcase' : `${selectedCategory} Collection`}
+            </h2>
+          </div>
+
+          {loading ? (
+            <p className="loading-text">Accessing inventory records...</p>
+          ) : filteredWatches.length === 0 ? (
+            <div className="no-watches-box">
+              <p className="no-watches-text">No timepieces available under "{selectedCategory}".</p>
+              <p className="no-watches-sub">Select an alternate series or reset criteria.</p>
+            </div>
+          ) : (
+            <div className="inventory-grid">
+              {filteredWatches.map((watch) => (
+                <div key={watch.id} className="watch-card">
+                  
+                  {/* Watch Image */}
+                  <div className="watch-image-container">
+                    {watch.imageUrl ? (
+                      <img src={watch.imageUrl} alt={watch.modelName} className="watch-img" />
+                    ) : (
+                      <span className="placeholder-text">[ Archive Visual Placeholder ]</span>
+                    )}
+                  </div>
+
+                  {/* Status Badge */}
+                  {watch.status && (
+                    <span className="watch-status-badge">{watch.status}</span>
+                  )}
+
+                  {/* Gradient Overlay */}
+                  <div className="watch-overlay"></div>
+
+                  {/* Watch Information */}
+                  <div className="watch-info-content">
+                    <div className="watch-info-top">
+                      <h3 className="watch-brand">{watch.brand}</h3>
+                      {watch.category && (
+                        <span className="watch-cat-tag">{watch.category}</span>
+                      )}
+                    </div>
+                    <p className="watch-model">{watch.modelName}</p>
+                    
+                    <div className="watch-footer-row">
+                      <span className="watch-price">₱ {watch.targetSellingPrice}</span>
+                      <span className="watch-ref">Ref. {watch.referenceNumber}</span>
+                    </div>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          )}
+        </main>
+
+        {/* TRADITIONAL ABOUT US & CONTACT FOOTER SECTIONS */}
+        <footer className="site-footer">
+          <div className="footer-grid">
+            <div className="footer-col">
+              <h4 className="footer-heading">About Us</h4>
+              <p className="footer-text">
+                ???? is dedicated to sourcing, preserving, and curating exceptional mechanical wristwatches. Specializing in legendary Seiko references, we bridge heritage craftsmanship with contemporary collectors.
+              </p>
+            </div>
+            <div className="footer-col">
+              <h4 className="footer-heading">Atelier & Inquiries</h4>
+              <p className="footer-text">
+                Looking to acquire, consign, or trade a specific reference? Connect with our private curators directly through our verified channels or message us for consultation.
+              </p>
+              <p className="footer-contact-info">Email: concierge@watchproject.com</p>
+              <p className="footer-contact-info">Location: Laguna, Philippines</p>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>&copy; 2026 watchproject. All Rights Reserved.</p>
+          </div>
+        </footer>
+
+      </div>
+
+      {/* STATIC FLOATING SOCIAL WIDGET */}
+      <div className="floating-social">
+        <a 
+          href="https://m.me/YOUR_PAGE_USERNAME" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          title="Inquire via Messenger"
+          className="social-btn messenger"
+        >
+          <svg className="social-svg" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.91 1.455 5.493 3.73 7.18V22l3.4-1.87c.91.253 1.87.387 2.87.387 5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.06 12.54l-2.55-2.72-4.97 2.72 5.46-5.8 2.59 2.72 4.93-2.72-5.46 5.8z"/>
+          </svg>
+        </a>
+
+        <a 
+          href="https://facebook.com/YOUR_PAGE_USERNAME" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          title="Visit our Atelier Page"
+          className="social-btn facebook"
+        >
+          <svg className="social-svg" viewBox="0 0 24 24">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+        </a>
+      </div>
 
     </div>
   );

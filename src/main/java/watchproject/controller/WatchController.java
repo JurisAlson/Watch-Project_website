@@ -1,7 +1,7 @@
-package com.watchproject.watch_project.controller;
+package watchproject.controller;
 
-import com.watchproject.watch_project.model.Watch;
-import com.watchproject.watch_project.repository.WatchRepository;
+import watchproject.model.Watch;
+import watchproject.repository.WatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +18,15 @@ public class WatchController {
     @GetMapping
     public List<Watch> getAllWatches() {
         return watchRepository.findAll();
+    }
+
+    @GetMapping("/latest")
+    public List<Watch> getLatestWatches() {
+        return watchRepository.findAllByOrderByPublishedDateDesc()
+                .stream()
+                .filter(watch -> watch.getPublishedDate() != null)
+                .limit(5)
+                .toList();
     }
 
     @PostMapping

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Catalog from './Catalog';
 
-function App() {
+function Home() {
   const [watches, setWatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -49,7 +51,7 @@ function App() {
 
   // Fetch watches from your Java backend when the page loads
   useEffect(() => {
-    fetch('http://localhost:8080/api/watches')
+    fetch('http://localhost:8080/api/watches/latest')
       .then((res) => res.json())
       .then((data) => {
         setWatches(data);
@@ -98,8 +100,8 @@ function App() {
 
         {/* Minimalist Navigation Links */}
         <nav className="nav-links">
-          <span className="nav-link active">HOME</span>
-          <span className="nav-link">Catalog</span>
+          <Link to="/" className="nav-link active">HOME</Link>
+          <Link to="/catalog" className="nav-link">Catalog</Link>
           <span className="nav-link">Contact</span>
           <span className="nav-link">About us</span>
         </nav>
@@ -370,6 +372,17 @@ function App() {
       </div>
 
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

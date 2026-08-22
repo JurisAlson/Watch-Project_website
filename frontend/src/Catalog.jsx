@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './Catalog.css';
 
 function Catalog() {
   const [watches, setWatches] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
     fetch('http://localhost:8080/api/watches')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch watches');
-        }
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setWatches(data);
         setLoading(false);
@@ -23,79 +21,322 @@ function Catalog() {
       });
   }, []);
 
+  const filteredWatches = watches.filter((watch) => {
+    const matchesSearch =
+      watch.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      watch.modelName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (watch.referenceNumber &&
+        watch.referenceNumber.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    const matchesCategory =
+      selectedCategory === 'All' ||
+      (watch.category &&
+        watch.category.toLowerCase() === selectedCategory.toLowerCase());
+
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <div className="catalog-page">
 
-      <header className="catalog-header">
-        <h1>Watch Catalog</h1>
-        <p>Explore our complete collection.</p>
+      {/* SAME HEADER / NAVIGATION AS HOME */}
+      <header className="app-header">
+        <div className="header-top-row">
+          <h1 className="header-logo">wala pa po name</h1>
+
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search archive reference..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
+
+          <div className="user-icon">👤</div>
+        </div>
+
+        <nav className="nav-links">
+          <Link to="/" className="nav-link">
+            HOME
+          </Link>
+
+          <Link to="/catalog" className="nav-link active">
+            Catalog
+          </Link>
+
+          <span className="nav-link">Contact</span>
+          <span className="nav-link">About us</span>
+        </nav>
       </header>
 
-      {loading ? (
-        <p>Accessing inventory records...</p>
-      ) : watches.length === 0 ? (
-        <p>No watches currently available.</p>
-      ) : (
-        <div className="inventory-grid">
-          {watches.map((watch) => (
-            <Link
-              to={`/catalog/${watch.id}`}
-              key={watch.id}
-              className="watch-card"
+      <main className="catalog-content">
+
+        {/* CATALOG INTRO */}
+        <section className="catalog-hero">
+          <p className="gold-tag">THE COLLECTION</p>
+          <h2 className="catalog-title">Watch Archive</h2>
+          <p className="catalog-description">
+            Explore our complete collection of curated timepieces,
+            from contemporary references to limited editions and iconic
+            mechanical watches.
+          </p>
+        </section>
+
+        {/* FILTERS */}
+        <section className="catalog-filters">
+
+          <div className="catalog-filter-header">
+            <div>
+              <p className="gold-tag">Browse Collection</p>
+              <h3 className="catalog-section-title">
+                All Timepieces
+              </h3>
+            </div>
+
+            {selectedCategory !== 'All' && (
+              <button
+                onClick={() => setSelectedCategory('All')}
+                className="reset-filter-btn"
+              >
+                Reset Filter
+              </button>
+            )}
+          </div>
+
+          <div className="catalog-category-buttons">
+            <button
+              onClick={() => setSelectedCategory('All')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'All' ? 'selected' : ''
+              }`}
             >
-              <div className="watch-image-container">
-                {watch.imageUrl ? (
-                  <img
-                    src={watch.imageUrl}
-                    alt={watch.modelName}
-                    className="watch-img"
-                  />
-                ) : (
-                  <span className="placeholder-text">
-                    [ Archive Visual Placeholder ]
-                  </span>
-                )}
-              </div>
+              All
+            </button>
 
-              {watch.status && (
-                <span className="watch-status-badge">
-                  {watch.status}
-                </span>
-              )}
+            <button
+              onClick={() => setSelectedCategory('Prospex')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'Prospex' ? 'selected' : ''
+              }`}
+            >
+              Prospex
+            </button>
 
-              <div className="watch-overlay"></div>
+            <button
+              onClick={() => setSelectedCategory('Presage')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'Presage' ? 'selected' : ''
+              }`}
+            >
+              Presage
+            </button>
 
-              <div className="watch-info-content">
-                <div className="watch-info-top">
-                  <h3 className="watch-brand">{watch.brand}</h3>
+            <button
+              onClick={() => setSelectedCategory('Seiko 5')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'Seiko 5' ? 'selected' : ''
+              }`}
+            >
+              Seiko 5
+            </button>
 
-                  {watch.category && (
-                    <span className="watch-cat-tag">
-                      {watch.category}
+            <button
+              onClick={() => setSelectedCategory('GMT')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'GMT' ? 'selected' : ''
+              }`}
+            >
+              GMT
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory('Diver')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'Diver' ? 'selected' : ''
+              }`}
+            >
+              Diver
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory('Dress')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'Dress' ? 'selected' : ''
+              }`}
+            >
+              Dress
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory('Field')}
+              className={`catalog-category-btn ${
+                selectedCategory === 'Field' ? 'selected' : ''
+              }`}
+            >
+              Field
+            </button>
+          </div>
+
+        </section>
+
+        {/* WATCH CATALOG */}
+        <section className="catalog-inventory">
+
+          {loading ? (
+            <p className="loading-text">
+              Accessing inventory records...
+            </p>
+          ) : filteredWatches.length === 0 ? (
+            <div className="no-watches-box">
+              <p className="no-watches-text">
+                No timepieces found.
+              </p>
+              <p className="no-watches-sub">
+                Try another search or category.
+              </p>
+            </div>
+          ) : (
+            <div className="catalog-grid">
+
+              {filteredWatches.map((watch) => (
+                <div
+                  key={watch.id}
+                  className="catalog-watch-card"
+                >
+
+                  <div className="catalog-watch-image">
+                    {watch.imageUrl ? (
+                      <img
+                        src={watch.imageUrl}
+                        alt={watch.modelName}
+                      />
+                    ) : (
+                      <span>
+                        [ Archive Visual Placeholder ]
+                      </span>
+                    )}
+                  </div>
+
+                  {watch.status && (
+                    <span className="watch-status-badge">
+                      {watch.status}
                     </span>
                   )}
+
+                  <div className="catalog-watch-info">
+
+                    <div className="catalog-watch-top">
+                      <h3>{watch.brand}</h3>
+
+                      {watch.category && (
+                        <span className="watch-cat-tag">
+                          {watch.category}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="catalog-watch-model">
+                      {watch.modelName}
+                    </p>
+
+                    <p className="catalog-watch-reference">
+                      Ref. {watch.referenceNumber}
+                    </p>
+
+                    <div className="catalog-watch-footer">
+                      <span className="catalog-watch-price">
+                        ₱ {Number(watch.targetSellingPrice).toLocaleString()}
+                      </span>
+
+                      <span className="catalog-view">
+                        VIEW →
+                      </span>
+                    </div>
+
+                  </div>
+
                 </div>
+              ))}
 
-                <p className="watch-model">
-                  {watch.modelName}
-                </p>
+            </div>
+          )}
 
-                <div className="watch-footer-row">
-                  <span className="watch-price">
-                    ₱ {watch.targetSellingPrice}
-                  </span>
+        </section>
 
-                  <span className="watch-ref">
-                    Ref. {watch.referenceNumber}
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
+      </main>
+      <footer className="site-footer">
+        <div className="footer-grid">
+
+          <div className="footer-col">
+            <h4 className="footer-heading">About Us</h4>
+
+            <p className="footer-text">
+              ???? is dedicated to sourcing, preserving, and curating exceptional
+              mechanical wristwatches. Specializing in legendary Seiko references,
+              we bridge heritage craftsmanship with contemporary collectors.
+            </p>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-heading">Atelier & Inquiries</h4>
+
+            <p className="footer-text">
+              Looking to acquire, consign, or trade a specific reference? Connect
+              with our private curators directly through our verified channels or
+              message us for consultation.
+            </p>
+
+            <p className="footer-contact-info">
+              Email: concierge@watchproject.com
+            </p>
+
+            <p className="footer-contact-info">
+              Location: Laguna, Philippines
+            </p>
+          </div>
         </div>
-      )}
+
+        <div className="footer-bottom">
+          <p>&copy; 2026 watchproject. All Rights Reserved.</p>
+        </div>
+      </footer>
+
+      {/* SAME STATIC SOCIAL WIDGET AS HOME */}
+      <div className="floating-social">
+
+        <a
+          href="https://m.me/YOUR_PAGE_USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Inquire via Messenger"
+          className="social-btn messenger"
+        >
+          <svg className="social-svg" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.91 1.455 5.493 3.73 7.18V22l3.4-1.87c.91.253 1.87.387 2.87.387 5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.06 12.54l-2.55-2.72-4.97 2.72 5.46-5.8 2.59 2.72 4.93-2.72-5.46 5.8z"/>
+          </svg>
+        </a>
+
+        <a
+          href="https://facebook.com/YOUR_PAGE_USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Visit our Atelier Page"
+          className="social-btn facebook"
+        >
+          <svg className="social-svg" viewBox="0 0 24 24">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+        </a>
+
+      </div>
 
     </div>
+
+
+
+    
   );
 }
 

@@ -15,21 +15,6 @@ body {
   position: relative;
 }
 
-/* Transparent Header & Nav Bar */
-.app-header {
-position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999; /* Increased from 1000 to stay strictly on top */
-  background-color: rgba(13, 13, 13, 0.85); /* Slightly richer blur opacity */
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 16px clamp(20px, 4vw, 60px);
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .header-top-row {
   display: flex;
   justify-content: space-between;

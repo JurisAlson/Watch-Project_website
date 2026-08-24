@@ -14,6 +14,7 @@ import Catalog from './Catalog';
 import Admin from './Admin';
 import WatchDetails from './WatchDetails';
 import AboutUs from './AboutUs';
+import Navbar from './Navbar';
 
 
 function Home() {
@@ -91,35 +92,7 @@ function Home() {
 
   return (
     <div className="app-container">
-      
-      {/* TRANSPARENT FIXED HEADER & NAV BAR */}
-      <header className="app-header">
-        <div className="header-top-row">
-          <h1 className="header-logo">wala pa po name</h1>
-          
-          {/* Search Bar */}
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search archive reference..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-            />
-          </div>
-
-          <div className="user-icon">👤</div>
-        </div>
-
-        {/* Minimalist Navigation Links */}
-        <nav className="nav-links">
-          <Link to="/" className="nav-link active">HOME</Link>
-          <Link to="/catalog" className="nav-link">Catalog</Link>
-          <Link to="/contact" className="nav-link">Contact</Link>
-          <Link to="/about" className="nav-link">About us</Link>
-        </nav>
-      </header>
-
+    
       <div className="content-wrapper">
 
         {/* EDITORIAL 3-VIDEO HERO SECTION */}
@@ -467,7 +440,11 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter>
+
+      <Navbar />
+
       <AnimatedRoutes />
+
     </BrowserRouter>
   );
 }

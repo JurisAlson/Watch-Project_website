@@ -39,38 +39,6 @@ function Catalog() {
   return (
     <div className="catalog-page">
 
-      {/* SAME HEADER / NAVIGATION AS HOME */}
-      <header className="app-header">
-        <div className="header-top-row">
-          <h1 className="header-logo">wala pa po name</h1>
-
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search archive reference..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-            />
-          </div>
-
-          <div className="user-icon">👤</div>
-        </div>
-
-        <nav className="nav-links">
-          <Link to="/" className="nav-link">
-            HOME
-          </Link>
-
-          <Link to="/catalog" className="nav-link active">
-            Catalog
-          </Link>
-
-          <span className="nav-link">Contact</span>
-          <span className="nav-link">About us</span>
-        </nav>
-      </header>
-
       <main className="catalog-content">
 
         {/* CATALOG INTRO */}

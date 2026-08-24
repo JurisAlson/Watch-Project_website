@@ -78,31 +78,6 @@ function WatchDetails() {
   return (
     <div className="watch-details-page">
 
-      <header className="app-header">
-        <div className="header-top-row">
-          <h1 className="header-logo">
-            wala pa po name
-          </h1>
-
-          <Link to="/catalog" className="details-back-link">
-            ← BACK TO CATALOG
-          </Link>
-        </div>
-
-        <nav className="nav-links">
-          <Link to="/" className="nav-link">
-            HOME
-          </Link>
-
-          <Link to="/catalog" className="nav-link active">
-            CATALOG
-          </Link>
-
-          <span className="nav-link">Contact</span>
-          <span className="nav-link">About us</span>
-        </nav>
-      </header>
-
       <main className="watch-details-content">
 
         <div className="watch-details-grid">

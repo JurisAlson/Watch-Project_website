@@ -1,0 +1,439 @@
+.about-page {
+  background: #0d0d0d;
+  color: #f4f4f4;
+  min-height: 100vh;
+}
+
+
+/* =================================
+   GRAND SEIKO HERO
+================================= */
+
+.about-hero {
+  position: relative;
+
+  width: 100%;
+  height: 92vh;
+  min-height: 650px;
+
+  overflow: hidden;
+}
+
+.about-hero-video {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  inset: 0;
+}
+
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.05) 45%,
+      rgba(0, 0, 0, 0.85)
+    );
+}
+
+.about-hero-content {
+  position: absolute;
+
+  left: 8%;
+  bottom: 14%;
+
+  max-width: 700px;
+
+  z-index: 2;
+}
+
+.about-hero-tag {
+  color: #c5a46d;
+
+  font-size: 10px;
+  letter-spacing: 4px;
+
+  margin-bottom: 22px;
+}
+
+.about-hero-title {
+  margin: 0;
+
+  font-size: clamp(70px, 10vw, 155px);
+
+  line-height: 0.84;
+
+  font-weight: 400;
+
+  letter-spacing: -5px;
+}
+
+.about-hero-subtitle {
+  max-width: 470px;
+
+  margin-top: 30px;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+.about-hero-bottom {
+  position: absolute;
+
+  left: 8%;
+  right: 8%;
+  bottom: 30px;
+
+  display: flex;
+  justify-content: space-between;
+
+  z-index: 2;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+}
+
+
+/* =================================
+   FULL WIDTH MOVEMENT
+================================= */
+
+.movement-section {
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+
+  overflow: hidden;
+}
+
+.movement-video {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.movement-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.05) 70%
+    );
+}
+
+.movement-content {
+  position: absolute;
+
+  left: 8%;
+  bottom: 12%;
+
+  max-width: 550px;
+
+  z-index: 2;
+}
+
+.gold-tag {
+  color: #c5a46d;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+.movement-content h2 {
+  font-size: clamp(55px, 7vw, 110px);
+
+  line-height: 0.9;
+
+  font-weight: 400;
+
+  letter-spacing: -3px;
+
+  margin: 25px 0;
+}
+
+.movement-content p:last-child {
+  max-width: 420px;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* =================================
+   PHILOSOPHY
+================================= */
+
+.about-philosophy {
+  max-width: 1300px;
+
+  margin: auto;
+
+  padding: 150px 7%;
+}
+
+.about-section-number {
+  color: #c5a46d;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+}
+
+.philosophy-grid {
+  display: grid;
+
+  grid-template-columns: 1.2fr 0.8fr;
+
+  gap: 120px;
+
+  margin-top: 80px;
+}
+
+.philosophy-grid h2 {
+  margin: 0;
+
+  font-size: clamp(42px, 5vw, 75px);
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  letter-spacing: -2px;
+}
+
+.philosophy-copy p {
+  color: #888;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+  margin-bottom: 25px;
+}
+
+
+/* =================================
+   VALUES
+================================= */
+
+.about-values {
+  border-top: 1px solid #222;
+
+  max-width: 1300px;
+
+  margin: auto;
+
+  padding: 120px 7%;
+}
+
+.values-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 80px;
+
+  margin-top: 80px;
+}
+
+.value-item span {
+  color: #c5a46d;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+}
+
+.value-item h3 {
+  margin: 25px 0 18px;
+
+  font-size: 17px;
+
+  letter-spacing: 3px;
+
+  font-weight: 500;
+}
+
+.value-item p {
+  color: #777;
+
+  max-width: 300px;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* =================================
+   CONTACT
+================================= */
+
+.about-contact {
+  text-align: center;
+
+  padding: 180px 30px;
+}
+
+.about-contact h2 {
+  font-size: clamp(42px, 6vw, 80px);
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  letter-spacing: -2px;
+
+  margin: 25px 0;
+}
+
+.about-contact > p:not(.gold-tag) {
+  max-width: 450px;
+
+  margin: 0 auto 40px;
+
+  color: #777;
+
+  line-height: 1.8;
+}
+
+.about-contact-button {
+  display: inline-block;
+
+  border: 1px solid #444;
+
+  padding: 16px 32px;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  transition: 0.3s ease;
+}
+
+.about-contact-button:hover {
+  background: white;
+
+  color: black;
+}
+
+
+/* =================================
+   FOOTER
+================================= */
+
+.about-footer {
+  border-top: 1px solid #222;
+
+  padding: 30px 7%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #555;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 768px) {
+
+  .about-hero {
+    height: 80vh;
+    min-height: 600px;
+  }
+
+  .about-hero-content {
+    left: 7%;
+    right: 7%;
+  }
+
+  .about-hero-title {
+    letter-spacing: -3px;
+  }
+
+  .movement-section {
+    height: 75vh;
+    min-height: 550px;
+  }
+
+  .movement-content {
+    left: 7%;
+    right: 7%;
+  }
+
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+
+    gap: 50px;
+
+    margin-top: 55px;
+  }
+
+  .about-philosophy {
+    padding: 100px 7%;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+
+    gap: 55px;
+
+    margin-top: 60px;
+  }
+
+  .about-values {
+    padding: 100px 7%;
+  }
+
+  .about-contact {
+    padding: 120px 25px;
+  }
+
+  .about-footer {
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+}

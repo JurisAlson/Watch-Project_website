@@ -13,6 +13,7 @@ import PageTransition from './PageTransition';
 import Catalog from './Catalog';
 import Admin from './Admin';
 import WatchDetails from './WatchDetails';
+import AboutUs from './AboutUs';
 
 
 function Home() {
@@ -114,8 +115,8 @@ function Home() {
         <nav className="nav-links">
           <Link to="/" className="nav-link active">HOME</Link>
           <Link to="/catalog" className="nav-link">Catalog</Link>
-          <span className="nav-link">Contact</span>
-          <span className="nav-link">About us</span>
+          <Link to="/contact" className="nav-link">Contact</Link>
+          <Link to="/about" className="nav-link">About us</Link>
         </nav>
       </header>
 
@@ -422,6 +423,15 @@ function AnimatedRoutes() {
           element={
             <PageTransition>
               <Home />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <PageTransition>
+              <AboutUs />
             </PageTransition>
           }
         />

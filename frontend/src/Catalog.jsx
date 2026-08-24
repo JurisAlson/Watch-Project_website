@@ -200,65 +200,60 @@ function Catalog() {
           ) : (
             <div className="catalog-grid">
 
-              {filteredWatches.map((watch) => (
-                <div
-                  key={watch.id}
-                  className="catalog-watch-card"
-                >
+ {filteredWatches.map((watch) => (
+  <Link
+    to={`/watch/${watch.id}`}
+    key={watch.id}
+    className="catalog-watch-card"
+  >
+    <div className="catalog-watch-image">
+      {watch.imageUrl ? (
+        <img
+          src={watch.imageUrl}
+          alt={watch.modelName}
+        />
+      ) : (
+        <span>[ Archive Visual Placeholder ]</span>
+      )}
+    </div>
 
-                  <div className="catalog-watch-image">
-                    {watch.imageUrl ? (
-                      <img
-                        src={watch.imageUrl}
-                        alt={watch.modelName}
-                      />
-                    ) : (
-                      <span>
-                        [ Archive Visual Placeholder ]
-                      </span>
-                    )}
-                  </div>
+    {watch.status && (
+      <span className="watch-status-badge">
+        {watch.status}
+      </span>
+    )}
 
-                  {watch.status && (
-                    <span className="watch-status-badge">
-                      {watch.status}
-                    </span>
-                  )}
+    <div className="catalog-watch-info">
+      <div className="catalog-watch-top">
+        <h3>{watch.brand}</h3>
 
-                  <div className="catalog-watch-info">
+        {watch.category && (
+          <span className="watch-cat-tag">
+            {watch.category}
+          </span>
+        )}
+      </div>
 
-                    <div className="catalog-watch-top">
-                      <h3>{watch.brand}</h3>
+      <p className="catalog-watch-model">
+        {watch.modelName}
+      </p>
 
-                      {watch.category && (
-                        <span className="watch-cat-tag">
-                          {watch.category}
-                        </span>
-                      )}
-                    </div>
+      <p className="catalog-watch-reference">
+        Ref. {watch.referenceNumber}
+      </p>
 
-                    <p className="catalog-watch-model">
-                      {watch.modelName}
-                    </p>
+      <div className="catalog-watch-footer">
+        <span className="catalog-watch-price">
+          ₱ {Number(watch.targetSellingPrice).toLocaleString()}
+        </span>
 
-                    <p className="catalog-watch-reference">
-                      Ref. {watch.referenceNumber}
-                    </p>
-
-                    <div className="catalog-watch-footer">
-                      <span className="catalog-watch-price">
-                        ₱ {Number(watch.targetSellingPrice).toLocaleString()}
-                      </span>
-
-                      <span className="catalog-view">
-                        VIEW →
-                      </span>
-                    </div>
-
-                  </div>
-
-                </div>
-              ))}
+        <span className="catalog-view">
+          VIEW →
+        </span>
+      </div>
+    </div>
+  </Link>
+))}
 
             </div>
           )}

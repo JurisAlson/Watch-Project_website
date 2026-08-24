@@ -3,10 +3,12 @@ package watchproject.controller;
 import watchproject.model.Watch;
 import watchproject.repository.WatchRepository;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/watches")
@@ -32,6 +34,31 @@ public class WatchController {
                         )
                 )
                 .toList();
+    }
+
+    // GET ONE WATCH BY ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Watch> getWatchById(@PathVariable Long id) {
+
+        Optional<Watch> watchOptional = watchRepository.findById(id);
+
+        if (watchOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Watch watch = watchOptional.get();
+
+        // Hide sold watches after 30 days
+        if ("SOLD".equalsIgnoreCase(watch.getStatus())
+                && watch.getSoldDate() != null
+                && !watch.getSoldDate().isAfter(
+                        LocalDateTime.now().minusDays(30)
+                )) {
+
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(watch);
     }
 
     // GET LATEST 5 WATCHES

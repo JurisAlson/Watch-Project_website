@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Catalog from './Catalog';
 import Admin from './Admin';
+import WatchDetails from './WatchDetails';
 
 
 function Home() {
@@ -279,45 +280,68 @@ function Home() {
             </div>
           ) : (
             <div className="inventory-grid">
-              {filteredWatches.map((watch) => (
-                <div key={watch.id} className="watch-card">
-                  
-                  {/* Watch Image */}
-                  <div className="watch-image-container">
-                    {watch.imageUrl ? (
-                      <img src={watch.imageUrl} alt={watch.modelName} className="watch-img" />
-                    ) : (
-                      <span className="placeholder-text">[ Archive Visual Placeholder ]</span>
-                    )}
-                  </div>
+  {filteredWatches.map((watch) => (
+    <Link
+      to={`/watch/${watch.id}`}
+      key={watch.id}
+      className="watch-card"
+    >
+      
+      {/* Watch Image */}
+      <div className="watch-image-container">
+        {watch.imageUrl ? (
+          <img
+            src={watch.imageUrl}
+            alt={watch.modelName}
+            className="watch-img"
+          />
+        ) : (
+          <span className="placeholder-text">
+            [ Archive Visual Placeholder ]
+          </span>
+        )}
+      </div>
 
-                  {/* Status Badge */}
-                  {watch.status && (
-                    <span className="watch-status-badge">{watch.status}</span>
-                  )}
+      {/* Status Badge */}
+      {watch.status && (
+        <span className="watch-status-badge">
+          {watch.status}
+        </span>
+      )}
 
-                  {/* Gradient Overlay */}
-                  <div className="watch-overlay"></div>
+      {/* Gradient Overlay */}
+      <div className="watch-overlay"></div>
 
-                  {/* Watch Information */}
-                  <div className="watch-info-content">
-                    <div className="watch-info-top">
-                      <h3 className="watch-brand">{watch.brand}</h3>
-                      {watch.category && (
-                        <span className="watch-cat-tag">{watch.category}</span>
-                      )}
-                    </div>
-                    <p className="watch-model">{watch.modelName}</p>
-                    
-                    <div className="watch-footer-row">
-                      <span className="watch-price">₱ {watch.targetSellingPrice}</span>
-                      <span className="watch-ref">Ref. {watch.referenceNumber}</span>
-                    </div>
-                  </div>
+      {/* Watch Information */}
+      <div className="watch-info-content">
+        <div className="watch-info-top">
+          <h3 className="watch-brand">{watch.brand}</h3>
 
-                </div>
-              ))}
-            </div>
+          {watch.category && (
+            <span className="watch-cat-tag">
+              {watch.category}
+            </span>
+          )}
+        </div>
+
+        <p className="watch-model">
+          {watch.modelName}
+        </p>
+
+        <div className="watch-footer-row">
+          <span className="watch-price">
+            ₱ {watch.targetSellingPrice}
+          </span>
+
+          <span className="watch-ref">
+            Ref. {watch.referenceNumber}
+          </span>
+        </div>
+      </div>
+
+    </Link>
+  ))}
+</div>
           )}
         </main>
 
@@ -384,6 +408,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/watch/:id" element={<WatchDetails />} />
       </Routes>
     </BrowserRouter>
   );

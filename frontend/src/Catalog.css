@@ -82,6 +82,9 @@
   background: #181818;
   min-height: 520px;
   transition: transform 0.3s ease;
+  display: block;
+  color: white;
+  text-decoration: none;
 }
 
 .catalog-watch-card:hover {

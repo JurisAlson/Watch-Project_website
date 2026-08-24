@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useLocation
+} from 'react-router-dom';
+
+import { AnimatePresence } from 'framer-motion';
+import PageTransition from './PageTransition';
 import Catalog from './Catalog';
 import Admin from './Admin';
 import WatchDetails from './WatchDetails';
@@ -401,15 +410,54 @@ function Home() {
   );
 }
 
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Home />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/catalog"
+          element={
+            <PageTransition>
+              <Catalog />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/watch/:id"
+          element={
+            <PageTransition>
+              <WatchDetails />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={<Admin />}
+        />
+
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/watch/:id" element={<WatchDetails />} />
-      </Routes>
+      <AnimatedRoutes />
     </BrowserRouter>
   );
 }

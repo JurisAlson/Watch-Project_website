@@ -1,291 +1,611 @@
+/* =========================================================
+   WATCHPROJECT — WATCH DETAILS
+========================================================= */
+
 .watch-details-page {
+  width: 100%;
   min-height: 100vh;
-  background: #121212;
-  color: white;
+
+  background: #0d0d0d;
+  color: #f5f5f5;
 }
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
 
 .watch-details-content {
   width: 100%;
-  max-width: 1400px;
+
+  max-width: 1100px;
+
   margin: 0 auto;
-  padding: 190px 40px 100px;
+
+  padding: 110px clamp(24px, 6vw, 80px) 80px;
 }
+
 
 .watch-details-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 70px;
+
+  grid-template-columns:
+    1.1fr
+    0.9fr;
+
+  gap: 60px;
+
   align-items: start;
 }
 
-/* IMAGE */
+
+/* =========================================================
+   IMAGE
+========================================================= */
 
 .watch-main-image {
   position: relative;
+
   width: 100%;
-  min-height: 600px;
+
+  min-height: 560px;
+
   padding: 0;
+
   border: none;
-  background: #1a1a1a;
+
+  background: #111;
+
   cursor: zoom-in;
+
   overflow: hidden;
 }
+
 
 .watch-main-image img {
   width: 100%;
   height: 100%;
-  min-height: 600px;
+
+  min-height: 560px;
+
   object-fit: cover;
+
   display: block;
-  transition: transform 0.5s ease;
+
+  transition:
+    transform 0.5s ease;
 }
 
+
 .watch-main-image:hover img {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
+
 
 .image-zoom-indicator {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+
+  right: 16px;
+  bottom: 16px;
+
   display: flex;
+
   align-items: center;
-  gap: 10px;
-  padding: 10px 15px;
-  background: rgba(18, 18, 18, 0.85);
-  font-size: 11px;
+
+  gap: 8px;
+
+  padding: 8px 12px;
+
+  background:
+    rgba(9, 9, 9, 0.85);
+
+  color: #777;
+
+  font-size: 0.55rem;
+
   letter-spacing: 1.5px;
-}
 
-.details-image-placeholder {
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.35;
-}
-
-/* DETAILS */
-
-.watch-details-info-section {
-  padding-top: 20px;
-}
-
-.details-back-link {
-  color: white;
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  opacity: 0.6;
-  transition: 0.2s ease;
-}
-
-.details-back-link:hover {
-  opacity: 1;
-}
-
-.details-watch-brand {
-  margin: 15px 0 8px;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 3px;
   text-transform: uppercase;
 }
 
-.details-watch-model {
-  margin: 0;
-  font-size: clamp(35px, 4vw, 60px);
-  font-weight: 400;
-  line-height: 1.1;
+
+.details-image-placeholder {
+  min-height: 560px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #555;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
 }
 
-.details-watch-reference {
-  margin: 15px 0 0;
-  font-size: 13px;
-  opacity: 0.5;
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.watch-details-info-section {
+  padding-top: 5px;
 }
+
+
+/* BACK LINK */
+
+.details-back-link {
+  color: #777;
+
+  text-decoration: none;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+
+  transition:
+    color 0.25s ease;
+}
+
+
+.details-back-link:hover {
+  color: #d4af37;
+}
+
+
+/* BRAND */
+
+.details-watch-brand {
+  margin: 25px 0 10px;
+
+  color: #d4af37;
+
+  font-size: 0.62rem;
+
+  font-weight: 600;
+
+  letter-spacing: 2.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* MODEL */
+
+.details-watch-model {
+  margin: 0;
+
+  color: #fff;
+
+  font-size:
+    clamp(2.2rem, 4vw, 3.8rem);
+
+  font-weight: 300;
+
+  line-height: 0.98;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* REFERENCE */
+
+.details-watch-reference {
+  margin: 14px 0 0;
+
+  color: #777;
+
+  font-size: 0.72rem;
+
+  letter-spacing: 0.5px;
+
+  font-weight: 300;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
 
 .details-price-row {
   display: flex;
+
   justify-content: space-between;
-  align-items: center;
-  margin-top: 50px;
+
+  align-items: flex-end;
+
+  gap: 25px;
+
+  margin-top: 45px;
 }
+
 
 .details-price-label,
 .details-section-label {
   margin: 0 0 10px;
-  font-size: 11px;
-  letter-spacing: 2px;
-  opacity: 0.5;
+
+  color: #555;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+
+  font-weight: 400;
 }
+
 
 .details-watch-price {
   margin: 0;
-  font-size: 28px;
+
+  color: #fff;
+
+  font-size: 1.35rem;
+
+  font-weight: 300;
+
+  letter-spacing: 0.5px;
 }
 
+
+/* STATUS */
+
 .details-status {
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 10px;
-  letter-spacing: 1.5px;
+  padding: 7px 10px;
+
+  border:
+    1px solid rgba(212, 175, 55, 0.35);
+
+  color: #d4af37;
+
+  font-size: 0.55rem;
+
+  letter-spacing: 1.4px;
+
   text-transform: uppercase;
+
+  white-space: nowrap;
 }
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
 
 .details-divider {
   width: 100%;
   height: 1px;
-  margin: 40px 0;
-  background: rgba(255, 255, 255, 0.12);
+
+  margin: 35px 0;
+
+  background:
+    rgba(255, 255, 255, 0.06);
 }
 
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
 .watch-description-section {
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
+
 
 .details-description {
   margin: 0;
+
+  color: #888;
+
+  font-size: 0.8rem;
+
   line-height: 1.8;
-  opacity: 0.65;
+
+  font-weight: 300;
 }
 
-/* SPECIFICATIONS */
+
+/* =========================================================
+   SPECIFICATIONS
+========================================================= */
 
 .spec-list {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
 }
+
 
 .spec-row {
   display: flex;
+
   justify-content: space-between;
-  gap: 20px;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 13px;
+
+  gap: 25px;
+
+  padding: 16px 0;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  color: #fff;
+
+  font-size: 0.76rem;
+
+  line-height: 1.5;
+
+  font-weight: 300;
 }
+
 
 .spec-row span {
-  opacity: 0.5;
+  color: #555;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.4px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
 }
 
+
 .spec-row strong {
-  font-weight: 400;
+  color: #888;
+
+  font-weight: 300;
+
   text-align: right;
 }
 
-/* BUTTONS */
+
+/* =========================================================
+   ACTIONS
+========================================================= */
 
 .watch-actions {
   display: flex;
-  gap: 15px;
-  margin-top: 45px;
+
+  gap: 12px;
+
+  margin-top: 40px;
 }
+
 
 .share-watch-btn,
 .messenger-watch-btn {
   flex: 1;
-  padding: 16px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  padding: 13px 15px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
   background: transparent;
-  color: white;
+
+  color: #888;
+
   text-decoration: none;
+
   text-align: center;
-  font-size: 10px;
-  letter-spacing: 1.5px;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+
+  font-weight: 400;
+
   cursor: pointer;
-  transition: 0.25s ease;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
+
 
 .share-watch-btn:hover {
-  background: white;
-  color: #121212;
+  color: #fff;
+
+  border-color:
+    rgba(255, 255, 255, 0.3);
+
+  background: transparent;
 }
+
 
 .messenger-watch-btn {
-  background: white;
-  color: #121212;
+  border-color:
+    rgba(212, 175, 55, 0.45);
+
+  color: #d4af37;
+
+  background: transparent;
 }
+
 
 .messenger-watch-btn:hover {
-  opacity: 0.8;
+  color: #fff;
+
+  border-color: #d4af37;
+
+  opacity: 1;
 }
 
-/* LIGHTBOX */
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
 
 .image-lightbox {
   position: fixed;
+
   inset: 0;
+
   z-index: 9999;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   padding: 40px;
-  background: rgba(0, 0, 0, 0.95);
+
+  background:
+    rgba(0, 0, 0, 0.96);
+
   cursor: zoom-out;
 }
+
 
 .image-lightbox img {
   max-width: 100%;
   max-height: 100%;
+
   object-fit: contain;
 }
 
+
 .lightbox-close {
   position: absolute;
-  top: 25px;
-  right: 35px;
+
+  top: 20px;
+  right: 28px;
+
   border: none;
+
   background: transparent;
-  color: white;
-  font-size: 45px;
+
+  color: #777;
+
+  font-size: 2.2rem;
+
   font-weight: 200;
+
   cursor: pointer;
+
+  transition:
+    color 0.25s ease;
 }
 
-/* STATES */
+
+.lightbox-close:hover {
+  color: #d4af37;
+}
+
+
+/* =========================================================
+   STATES
+========================================================= */
 
 .watch-loading,
 .watch-not-found {
-  padding: 250px 30px;
+  padding: 200px 30px;
+
   text-align: center;
+
+  color: #777;
+
+  font-size: 0.76rem;
+
+  font-weight: 300;
 }
+
 
 .watch-not-found h2 {
-  font-weight: 400;
+  margin: 0 0 15px;
+
+  color: #fff;
+
+  font-size: 2rem;
+
+  font-weight: 300;
+
+  letter-spacing: 0.5px;
 }
+
 
 .watch-not-found p {
-  opacity: 0.6;
-  margin-bottom: 30px;
+  margin: 0 0 25px;
+
+  color: #777;
+
+  font-size: 0.76rem;
+
+  font-weight: 300;
 }
+
 
 .back-catalog-btn {
-  color: white;
+  display: inline-block;
+
+  color: #d4af37;
+
   text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 1.5px;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+
+  transition:
+    letter-spacing 0.25s ease;
 }
 
-/* RESPONSIVE */
+
+.back-catalog-btn:hover {
+  letter-spacing: 2.4px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 1000px) {
+
   .watch-details-grid {
     grid-template-columns: 1fr;
-    gap: 50px;
+
+    gap: 45px;
   }
+
 
   .watch-main-image,
   .watch-main-image img,
   .details-image-placeholder {
     min-height: 500px;
   }
+
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 650px) {
+
   .watch-details-content {
-    padding: 160px 20px 70px;
+    padding-top: 80px;
+
+    padding-bottom: 60px;
   }
+
+
+  .watch-details-grid {
+    gap: 35px;
+  }
+
 
   .watch-main-image,
   .watch-main-image img,
@@ -293,19 +613,35 @@
     min-height: 400px;
   }
 
+
   .watch-actions {
     flex-direction: column;
   }
 
+
   .details-price-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 18px;
+
     margin-top: 35px;
   }
+
+
+  .details-watch-model {
+    font-size: 2.4rem;
+  }
+
 
   .image-zoom-indicator span {
     display: none;
   }
 
+
   .image-lightbox {
     padding: 20px;
   }
+
 }

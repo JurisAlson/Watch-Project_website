@@ -1,125 +1,197 @@
+/* =========================================================
+   WATCHPROJECT — ABOUT PAGE
+========================================================= */
+
 .about-page {
-  background: #0d0d0d;
-  color: #f4f4f4;
+  width: 100%;
   min-height: 100vh;
+
+  background: #0d0d0d;
+  color: #f5f5f5;
 }
 
 
-/* =================================
-   GRAND SEIKO HERO
-================================= */
+/* =========================================================
+   SHARED
+========================================================= */
+
+.gold-tag {
+  margin: 0 0 10px;
+
+  color: #d4af37;
+
+  font-size: 0.62rem;
+
+  letter-spacing: 2.5px;
+
+  text-transform: uppercase;
+
+  font-weight: 600;
+}
+
+
+.about-section-number {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  color: #555;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 2.2px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .about-hero {
   position: relative;
 
   width: 100%;
-  height: 92vh;
-  min-height: 650px;
+
+  height: min(680px, 82vh);
+  min-height: 500px;
 
   overflow: hidden;
+
+  background: #111;
 }
+
 
 .about-hero-video {
   position: absolute;
+
+  inset: 0;
 
   width: 100%;
   height: 100%;
 
   object-fit: cover;
 
-  inset: 0;
+  filter:
+    brightness(0.78)
+    contrast(1.02);
 }
+
 
 .about-hero-overlay {
   position: absolute;
+
   inset: 0;
 
   background:
     linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.05) 45%,
-      rgba(0, 0, 0, 0.85)
+      90deg,
+      rgba(0, 0, 0, 0.52),
+      rgba(0, 0, 0, 0.08) 75%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.55),
+      transparent 50%
     );
 }
+
 
 .about-hero-content {
   position: absolute;
 
-  left: 8%;
-  bottom: 14%;
+  left: clamp(24px, 7vw, 90px);
+  bottom: clamp(80px, 11vh, 105px);
 
-  max-width: 700px;
+  max-width: 520px;
 
   z-index: 2;
 }
 
+
 .about-hero-tag {
-  color: #c5a46d;
+  margin: 0 0 10px;
 
-  font-size: 10px;
-  letter-spacing: 4px;
+  color: #d4af37;
 
-  margin-bottom: 22px;
+  font-size: 0.62rem;
+
+  letter-spacing: 2.5px;
+
+  text-transform: uppercase;
+
+  font-weight: 600;
 }
+
 
 .about-hero-title {
   margin: 0;
 
-  font-size: clamp(70px, 10vw, 155px);
+  color: #fff;
 
-  line-height: 0.84;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
 
-  font-weight: 400;
+  line-height: 0.94;
 
-  letter-spacing: -5px;
+  letter-spacing: 0.5px;
+
+  font-weight: 300;
 }
+
 
 .about-hero-subtitle {
-  max-width: 470px;
+  max-width: 430px;
 
-  margin-top: 30px;
+  margin: 18px 0 0;
 
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.72);
 
-  font-size: 14px;
+  font-size: 0.82rem;
 
-  line-height: 1.8;
+  line-height: 1.7;
+
+  font-weight: 300;
 }
+
 
 .about-hero-bottom {
   position: absolute;
 
-  left: 8%;
-  right: 8%;
-  bottom: 30px;
+  left: clamp(24px, 7vw, 90px);
+  right: clamp(24px, 7vw, 90px);
 
-  display: flex;
-  justify-content: space-between;
+  bottom: 24px;
 
   z-index: 2;
 
-  color: rgba(255, 255, 255, 0.5);
+  display: flex;
 
-  font-size: 9px;
+  justify-content: space-between;
 
-  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.42);
+
+  font-size: 0.56rem;
+
+  letter-spacing: 1.8px;
 }
 
 
-/* =================================
-   FULL WIDTH MOVEMENT
-================================= */
+/* =========================================================
+   MOVEMENT
+========================================================= */
 
 .movement-section {
   position: relative;
 
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
+  height: 380px;
 
   overflow: hidden;
+
+  background: #111;
 }
+
 
 .movement-video {
   position: absolute;
@@ -132,308 +204,433 @@
   object-fit: cover;
 }
 
+
 .movement-overlay {
   position: absolute;
+
   inset: 0;
 
   background:
     linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.85),
-      rgba(0, 0, 0, 0.05) 70%
+      90deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.12)
     );
 }
+
 
 .movement-content {
   position: absolute;
 
-  left: 8%;
-  bottom: 12%;
+  left: clamp(24px, 7vw, 90px);
 
-  max-width: 550px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  max-width: 430px;
 
   z-index: 2;
 }
 
-.gold-tag {
-  color: #c5a46d;
-
-  font-size: 10px;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-}
 
 .movement-content h2 {
-  font-size: clamp(55px, 7vw, 110px);
+  margin: 0;
 
-  line-height: 0.9;
+  color: #fff;
 
-  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.3rem);
 
-  letter-spacing: -3px;
+  line-height: 0.95;
 
-  margin: 25px 0;
+  font-weight: 300;
+
+  letter-spacing: 0.5px;
 }
+
 
 .movement-content p:last-child {
-  max-width: 420px;
+  max-width: 360px;
 
-  color: rgba(255, 255, 255, 0.65);
+  margin: 17px 0 0;
 
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.68);
 
-  line-height: 1.8;
+  font-size: 0.8rem;
+
+  line-height: 1.7;
+
+  font-weight: 300;
 }
 
 
-/* =================================
+/* =========================================================
    PHILOSOPHY
-================================= */
+========================================================= */
 
 .about-philosophy {
-  max-width: 1300px;
+  width: 100%;
 
-  margin: auto;
+  padding: 72px clamp(24px, 6vw, 80px);
 
-  padding: 150px 7%;
+  background: #0d0d0d;
 }
 
-.about-section-number {
-  color: #c5a46d;
-
-  font-size: 10px;
-
-  letter-spacing: 3px;
-}
 
 .philosophy-grid {
+  max-width: 1100px;
+
+  margin: 30px auto 0;
+
   display: grid;
 
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns:
+    1.1fr
+    0.9fr;
 
-  gap: 120px;
-
-  margin-top: 80px;
+  gap: 80px;
 }
+
 
 .philosophy-grid h2 {
   margin: 0;
 
-  font-size: clamp(42px, 5vw, 75px);
+  color: #fff;
 
-  line-height: 1;
+  font-size: clamp(1.85rem, 3.5vw, 2.7rem);
 
-  font-weight: 400;
+  line-height: 0.98;
 
-  letter-spacing: -2px;
+  font-weight: 300;
+
+  letter-spacing: 0.5px;
 }
+
 
 .philosophy-copy p {
+  margin: 0 0 18px;
+
   color: #888;
 
-  font-size: 14px;
-
-  line-height: 1.9;
-
-  margin-bottom: 25px;
-}
-
-
-/* =================================
-   VALUES
-================================= */
-
-.about-values {
-  border-top: 1px solid #222;
-
-  max-width: 1300px;
-
-  margin: auto;
-
-  padding: 120px 7%;
-}
-
-.values-grid {
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 80px;
-
-  margin-top: 80px;
-}
-
-.value-item span {
-  color: #c5a46d;
-
-  font-size: 10px;
-
-  letter-spacing: 2px;
-}
-
-.value-item h3 {
-  margin: 25px 0 18px;
-
-  font-size: 17px;
-
-  letter-spacing: 3px;
-
-  font-weight: 500;
-}
-
-.value-item p {
-  color: #777;
-
-  max-width: 300px;
-
-  font-size: 14px;
+  font-size: 0.8rem;
 
   line-height: 1.8;
+
+  font-weight: 300;
 }
 
 
-/* =================================
+.philosophy-copy p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   VALUES
+========================================================= */
+
+.about-values {
+  width: 100%;
+
+  padding: 72px clamp(24px, 6vw, 80px);
+
+  background: #090909;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.values-grid {
+  max-width: 1100px;
+
+  margin: 30px auto 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+.value-item {
+  min-height: 240px;
+
+  padding: 25px;
+
+}
+
+
+.value-item span {
+  color: #d4af37;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.5px;
+}
+
+
+.value-item h3 {
+  margin: 40px 0 14px;
+
+  color: #fff;
+
+  font-size: 0.82rem;
+
+  letter-spacing: 1.8px;
+
+  font-weight: 400;
+}
+
+
+.value-item p {
+  max-width: 290px;
+
+  margin: 0;
+
+  color: #777;
+
+  font-size: 0.76rem;
+
+  line-height: 1.75;
+
+  font-weight: 300;
+}
+
+
+/* =========================================================
    CONTACT
-================================= */
+========================================================= */
 
 .about-contact {
-  text-align: center;
+  width: 100%;
 
-  padding: 180px 30px;
+  padding: 90px 24px;
+
+  background: #0d0d0d;
+
+  text-align: center;
 }
 
+
 .about-contact h2 {
-  font-size: clamp(42px, 6vw, 80px);
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(1.9rem, 4vw, 3rem);
 
   line-height: 1;
 
-  font-weight: 400;
+  font-weight: 300;
 
-  letter-spacing: -2px;
-
-  margin: 25px 0;
+  letter-spacing: 0.5px;
 }
+
 
 .about-contact > p:not(.gold-tag) {
-  max-width: 450px;
+  max-width: 420px;
 
-  margin: 0 auto 40px;
+  margin: 18px auto 25px;
 
-  color: #777;
+  color: #888;
 
-  line-height: 1.8;
+  font-size: 0.8rem;
+
+  line-height: 1.7;
+
+  font-weight: 300;
 }
+
 
 .about-contact-button {
-  display: inline-block;
+  display: inline-flex;
 
-  border: 1px solid #444;
+  align-items: center;
 
-  padding: 16px 32px;
+  gap: 12px;
 
-  color: white;
+  padding: 10px 0;
 
-  text-decoration: none;
+  border-bottom:
+    1px solid rgba(212, 175, 55, 0.6);
 
-  font-size: 10px;
+  color: #fff;
 
-  letter-spacing: 2px;
+  font-size: 0.62rem;
 
-  transition: 0.3s ease;
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+
+  transition:
+    gap 0.25s ease;
 }
+
+
+.about-contact-button span {
+  color: #d4af37;
+
+  font-size: 0.95rem;
+}
+
 
 .about-contact-button:hover {
-  background: white;
-
-  color: black;
+  gap: 18px;
 }
 
 
-/* =================================
+/* =========================================================
    FOOTER
-================================= */
+========================================================= */
 
 .about-footer {
-  border-top: 1px solid #222;
+  width: 100%;
 
-  padding: 30px 7%;
+  padding: 22px clamp(24px, 6vw, 80px);
+
+  background: #070707;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
 
   display: flex;
 
   justify-content: space-between;
 
-  color: #555;
+  color: #444;
 
-  font-size: 9px;
+  font-size: 0.55rem;
 
-  letter-spacing: 2px;
+  letter-spacing: 1.4px;
 }
 
 
-/* =================================
-   MOBILE
-================================= */
+/* =========================================================
+   TABLET
+========================================================= */
 
-@media (max-width: 768px) {
-
-  .about-hero {
-    height: 80vh;
-    min-height: 600px;
-  }
-
-  .about-hero-content {
-    left: 7%;
-    right: 7%;
-  }
-
-  .about-hero-title {
-    letter-spacing: -3px;
-  }
-
-  .movement-section {
-    height: 75vh;
-    min-height: 550px;
-  }
-
-  .movement-content {
-    left: 7%;
-    right: 7%;
-  }
+@media (max-width: 900px) {
 
   .philosophy-grid {
     grid-template-columns: 1fr;
 
-    gap: 50px;
-
-    margin-top: 55px;
+    gap: 35px;
   }
 
-  .about-philosophy {
-    padding: 100px 7%;
+  .values-grid {
+    gap: 12px;
   }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .about-hero {
+    height: 620px;
+
+    min-height: 560px;
+  }
+
+
+  .about-hero-content {
+    left: 24px;
+    right: 24px;
+
+    bottom: 80px;
+  }
+
+
+  .about-hero-title {
+    font-size: 3rem;
+  }
+
+
+  .about-hero-subtitle {
+    font-size: 0.77rem;
+  }
+
+
+  .about-hero-bottom {
+    left: 24px;
+    right: 24px;
+
+    bottom: 22px;
+  }
+
+
+  .movement-section {
+    height: 320px;
+  }
+
+
+  .movement-content {
+    left: 24px;
+    right: 24px;
+  }
+
+
+  .movement-content h2 {
+    font-size: 2.35rem;
+  }
+
+
+  .about-philosophy,
+  .about-values {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+
+  .philosophy-grid {
+    margin-top: 25px;
+
+    gap: 30px;
+  }
+
 
   .values-grid {
     grid-template-columns: 1fr;
 
-    gap: 55px;
+    margin-top: 25px;
 
-    margin-top: 60px;
+    gap: 12px;
   }
 
-  .about-values {
-    padding: 100px 7%;
+
+  .value-item {
+    min-height: auto;
+
+    padding: 24px;
   }
+
+
+  .value-item h3 {
+    margin-top: 30px;
+  }
+
 
   .about-contact {
-    padding: 120px 25px;
+    padding: 70px 24px;
   }
+
+
+  .about-contact h2 {
+    font-size: 2rem;
+  }
+
 
   .about-footer {
     flex-direction: column;
 
-    gap: 15px;
+    gap: 7px;
   }
 
 }

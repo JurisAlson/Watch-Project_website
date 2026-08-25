@@ -1,192 +1,791 @@
+/* =========================================================
+   WATCHPROJECT — CATALOG PAGE
+========================================================= */
+
 .catalog-page {
+  width: 100%;
   min-height: 100vh;
-  background: #121212;
-  color: white;
+
+  background: #0d0d0d;
+  color: #f5f5f5;
 }
+
+
+/* =========================================================
+   SHARED
+========================================================= */
+
+.gold-tag {
+  margin: 0 0 10px;
+
+  color: #d4af37;
+
+  font-size: 0.62rem;
+
+  letter-spacing: 2.5px;
+
+  text-transform: uppercase;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
 
 .catalog-content {
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 190px 40px 100px;
+
+  padding: 100px clamp(24px, 6vw, 80px) 72px;
+
+  background: #0d0d0d;
 }
+
+
+/* =========================================================
+   CATALOG INTRO
+========================================================= */
 
 .catalog-hero {
-  text-align: center;
-  max-width: 850px;
-  margin: 0 auto 100px;
+  max-width: 1100px;
+
+  margin: 0 auto 70px;
 }
+
 
 .catalog-title {
-  margin: 10px 0 20px;
-  font-size: clamp(42px, 6vw, 76px);
-  font-weight: 400;
-  letter-spacing: -2px;
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+
+  line-height: 0.94;
+
+  letter-spacing: 0.5px;
+
+  font-weight: 300;
 }
+
 
 .catalog-description {
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.8;
-  opacity: 0.65;
+  max-width: 500px;
+
+  margin: 18px 0 0;
+
+  color: #888;
+
+  font-size: 0.82rem;
+
+  line-height: 1.7;
+
+  font-weight: 300;
 }
 
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
 .catalog-filters {
-  margin-bottom: 60px;
+  max-width: 1100px;
+
+  margin: 0 auto 55px;
+
+  padding: 28px 0;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.06);
 }
+
 
 .catalog-filter-header {
   display: flex;
+
   align-items: flex-end;
+
   justify-content: space-between;
+
   gap: 30px;
-  margin-bottom: 30px;
+
+  margin-bottom: 24px;
 }
 
+
 .catalog-section-title {
-  margin: 8px 0 0;
-  font-size: 32px;
-  font-weight: 400;
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(1.85rem, 3.5vw, 2.7rem);
+
+  line-height: 0.98;
+
+  font-weight: 300;
+
+  letter-spacing: 0.5px;
 }
+
+
+.reset-filter-btn {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #777;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease;
+}
+
+
+.reset-filter-btn:hover {
+  color: #d4af37;
+}
+
+
+/* =========================================================
+   CATEGORY BUTTONS
+========================================================= */
 
 .catalog-category-buttons {
   display: flex;
+
   flex-wrap: wrap;
+
   gap: 10px;
 }
 
+
 .catalog-category-btn {
+  padding: 9px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 11px 20px;
+
+  color: #777;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  font-weight: 400;
+
   cursor: pointer;
-  transition: 0.25s ease;
+
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease;
 }
 
-.catalog-category-btn:hover,
-.catalog-category-btn.selected {
-  background: white;
-  color: #121212;
+
+.catalog-category-btn:hover {
+  border-color:
+    rgba(212, 175, 55, 0.5);
+
+  color: #fff;
 }
+
+
+.catalog-category-btn.selected {
+  border-color: #d4af37;
+
+  color: #d4af37;
+}
+
+
+/* =========================================================
+   INVENTORY
+========================================================= */
+
+.catalog-inventory {
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   CATALOG GRID
+========================================================= */
 
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
 }
+
+
+/* =========================================================
+   WATCH CARD
+========================================================= */
 
 .catalog-watch-card {
   position: relative;
-  overflow: hidden;
-  background: #181818;
-  min-height: 520px;
-  transition: transform 0.3s ease;
+
   display: block;
-  color: white;
+
+  overflow: hidden;
+
+  background: #090909;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  color: inherit;
+
   text-decoration: none;
+
+  transition:
+    border-color 0.3s ease;
 }
+
 
 .catalog-watch-card:hover {
-  transform: translateY(-5px);
+  border-color:
+    rgba(212, 175, 55, 0.35);
 }
+
+
+/* =========================================================
+   WATCH IMAGE
+========================================================= */
 
 .catalog-watch-image {
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #202020;
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
   overflow: hidden;
+
+  background: #111;
 }
+
 
 .catalog-watch-image img {
+  display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  transition: transform 0.5s ease;
+
+  transition:
+    transform 0.5s ease;
 }
 
-.catalog-watch-card:hover .catalog-watch-image img {
-  transform: scale(1.04);
+
+.catalog-watch-card:hover
+.catalog-watch-image img {
+  transform: scale(1.02);
 }
+
 
 .catalog-watch-image span {
-  opacity: 0.35;
-  font-size: 13px;
-}
-
-.catalog-watch-info {
-  padding: 24px;
-}
-
-.catalog-watch-top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-}
 
-.catalog-watch-top h3 {
-  margin: 0;
-  font-size: 13px;
-  letter-spacing: 2px;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: #555;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.5px;
+
   text-transform: uppercase;
 }
 
-.catalog-watch-model {
-  margin: 10px 0 5px;
-  font-size: 22px;
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+.watch-status-badge {
+  position: absolute;
+
+  top: 14px;
+  left: 14px;
+
+  padding: 7px 10px;
+
+  background:
+    rgba(9, 9, 9, 0.85);
+
+  color: #d4af37;
+
+  border:
+    1px solid rgba(212, 175, 55, 0.35);
+
+  font-size: 0.55rem;
+
+  letter-spacing: 1.4px;
+
+  text-transform: uppercase;
+
+  z-index: 2;
 }
 
-.catalog-watch-reference {
-  margin: 0;
-  font-size: 12px;
-  opacity: 0.45;
+
+/* =========================================================
+   WATCH INFO
+========================================================= */
+
+.catalog-watch-info {
+  padding: 20px;
 }
+
+
+.catalog-watch-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 10px;
+}
+
+
+.catalog-watch-top h3 {
+  margin: 0;
+
+  color: #d4af37;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+
+  font-weight: 400;
+}
+
+
+.watch-cat-tag {
+  color: #555;
+
+  font-size: 0.55rem;
+
+  letter-spacing: 1.4px;
+
+  text-transform: uppercase;
+}
+
+
+.catalog-watch-model {
+  margin: 0 0 8px;
+
+  color: #fff;
+
+  font-size: 1rem;
+
+  line-height: 1.25;
+
+  font-weight: 300;
+
+  letter-spacing: 0.3px;
+}
+
+
+.catalog-watch-reference {
+  margin: 0 0 22px;
+
+  color: #777;
+
+  font-size: 0.68rem;
+
+  letter-spacing: 0.5px;
+
+  font-weight: 300;
+}
+
+
+/* =========================================================
+   WATCH FOOTER
+========================================================= */
 
 .catalog-watch-footer {
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
-  margin-top: 25px;
+
+  gap: 15px;
+
+  padding-top: 16px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
 }
+
 
 .catalog-watch-price {
-  font-size: 18px;
+  color: #fff;
+
+  font-size: 0.78rem;
+
+  font-weight: 300;
 }
+
 
 .catalog-view {
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  opacity: 0.6;
+  color: #d4af37;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  font-weight: 400;
+
+  transition:
+    letter-spacing 0.25s ease;
 }
 
-.catalog-view:hover {
-  opacity: 1;
+
+.catalog-watch-card:hover
+.catalog-view {
+  letter-spacing: 2.4px;
 }
 
-@media (max-width: 1000px) {
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-text {
+  color: #777;
+
+  font-size: 0.76rem;
+
+  line-height: 1.7;
+
+  font-weight: 300;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.no-watches-box {
+  padding: 80px 24px;
+
+  text-align: center;
+
+  background: #090909;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.no-watches-text {
+  margin: 0 0 10px;
+
+  color: #fff;
+
+  font-size: 1.2rem;
+
+  font-weight: 300;
+
+  letter-spacing: 0.5px;
+}
+
+
+.no-watches-sub {
+  margin: 0;
+
+  color: #777;
+
+  font-size: 0.76rem;
+
+  line-height: 1.7;
+
+  font-weight: 300;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+  width: 100%;
+
+  padding: 22px clamp(24px, 6vw, 80px);
+
+  background: #070707;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.footer-grid {
+  display: grid;
+
+  grid-template-columns:
+    1.1fr 0.9fr;
+
+  gap: 80px;
+
+  max-width: 1100px;
+
+  margin: 0 auto 35px;
+}
+
+
+.footer-col h4 {
+  margin: 0 0 14px;
+
+  color: #d4af37;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1.8px;
+
+  font-weight: 400;
+}
+
+
+.footer-col p {
+  max-width: 360px;
+
+  margin: 0 0 12px;
+
+  color: #777;
+
+  font-size: 0.76rem;
+
+  line-height: 1.75;
+
+  font-weight: 300;
+}
+
+
+.footer-contact-info {
+  color: #555 !important;
+
+  font-size: 0.58rem !important;
+
+  letter-spacing: 1.4px;
+
+  text-transform: uppercase;
+}
+
+
+.footer-bottom {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #444;
+
+  font-size: 0.55rem;
+
+  letter-spacing: 1.4px;
+}
+
+
+/* =========================================================
+   FLOATING SOCIAL
+========================================================= */
+
+.floating-social {
+  position: fixed;
+
+  right: 24px;
+  bottom: 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  z-index: 10;
+}
+
+
+.social-btn {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  background:
+    rgba(9, 9, 9, 0.9);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  color: #777;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.social-btn:hover {
+  color: #d4af37;
+
+  border-color:
+    rgba(212, 175, 55, 0.5);
+}
+
+
+.social-svg {
+  width: 16px;
+  height: 16px;
+
+  fill: currentColor;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
   .catalog-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
-@media (max-width: 650px) {
-  .catalog-content {
-    padding: 160px 20px 70px;
+    gap: 12px;
   }
 
-  .catalog-grid {
+
+  .footer-grid {
     grid-template-columns: 1fr;
+
+    gap: 35px;
   }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .catalog-content {
+    padding-top: 80px;
+
+    padding-bottom: 60px;
+  }
+
+
+  .catalog-hero {
+    margin-bottom: 55px;
+  }
+
+
+  .catalog-title {
+    font-size: 3rem;
+  }
+
+
+  .catalog-description {
+    font-size: 0.77rem;
+  }
+
+
+  .catalog-filters {
+    margin-bottom: 40px;
+  }
+
 
   .catalog-filter-header {
     align-items: flex-start;
+
     flex-direction: column;
+
+    gap: 18px;
   }
 
-  .catalog-watch-image {
-    height: 320px;
+
+  .catalog-category-buttons {
+    gap: 8px;
   }
+
+
+  .catalog-category-btn {
+    padding: 8px 11px;
+  }
+
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+
+  .catalog-watch-info {
+    padding: 18px;
+  }
+
+
+  .footer-grid {
+    margin-bottom: 25px;
+  }
+
+
+  .footer-bottom {
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+
+  .floating-social {
+    right: 16px;
+    bottom: 16px;
+  }
+
 }

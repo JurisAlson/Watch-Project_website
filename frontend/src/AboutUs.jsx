@@ -226,13 +226,62 @@ function AboutUs() {
       </section>
 
 
-      <footer className="about-footer">
+      {/* ========================================
+          FOOTER
+      ======================================== */}
 
-        <span>WATCHPROJECT</span>
+      <footer className="site-footer">
 
-        <span>
-          © 2026 ALL RIGHTS RESERVED
-        </span>
+        <div className="footer-grid">
+
+
+          <div className="footer-col">
+
+            <h4>
+              WATCHPROJECT
+            </h4>
+
+            <p>
+              A private platform dedicated to sourcing,
+              preserving, and curating exceptional
+              mechanical timepieces.
+            </p>
+
+          </div>
+
+
+          <div className="footer-col">
+
+            <h4>
+              INQUIRIES
+            </h4>
+
+            <p>
+              Looking to acquire, trade, sell,
+              or consign a specific reference?
+            </p>
+
+            <p className="footer-contact-info">
+              Laguna, Philippines
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+        <div className="footer-bottom">
+
+          <span>
+            © 2026 WATCHPROJECT
+          </span>
+
+          <span>
+            ALL RIGHTS RESERVED
+          </span>
+
+        </div>
 
       </footer>
 

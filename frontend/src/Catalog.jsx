@@ -229,41 +229,63 @@ function Catalog() {
         </section>
 
       </main>
+       {/* ========================================
+          FOOTER
+      ======================================== */}
+
       <footer className="site-footer">
+
         <div className="footer-grid">
 
-          <div className="footer-col">
-            <h4 className="footer-heading">About Us</h4>
 
-            <p className="footer-text">
-              ???? is dedicated to sourcing, preserving, and curating exceptional
-              mechanical wristwatches. Specializing in legendary Seiko references,
-              we bridge heritage craftsmanship with contemporary collectors.
+          <div className="footer-col">
+
+            <h4>
+              WATCHPROJECT
+            </h4>
+
+            <p>
+              A private platform dedicated to sourcing,
+              preserving, and curating exceptional
+              mechanical timepieces.
             </p>
+
           </div>
 
-          <div className="footer-col">
-            <h4 className="footer-heading">Atelier & Inquiries</h4>
 
-            <p className="footer-text">
-              Looking to acquire, consign, or trade a specific reference? Connect
-              with our private curators directly through our verified channels or
-              message us for consultation.
+          <div className="footer-col">
+
+            <h4>
+              INQUIRIES
+            </h4>
+
+            <p>
+              Looking to acquire, trade, sell,
+              or consign a specific reference?
             </p>
 
             <p className="footer-contact-info">
-              Email: concierge@watchproject.com
+              Laguna, Philippines
             </p>
 
-            <p className="footer-contact-info">
-              Location: Laguna, Philippines
-            </p>
           </div>
+
+
         </div>
+
 
         <div className="footer-bottom">
-          <p>&copy; 2026 watchproject. All Rights Reserved.</p>
+
+          <span>
+            © 2026 WATCHPROJECT
+          </span>
+
+          <span>
+            ALL RIGHTS RESERVED
+          </span>
+
         </div>
+
       </footer>
 
       {/* SAME STATIC SOCIAL WIDGET AS HOME */}

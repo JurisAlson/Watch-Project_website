@@ -29,6 +29,8 @@ function WatchDetails() {
   }, [id]);
 
   const handleShare = async () => {
+    if (!watch) return;
+
     const shareData = {
       title: `${watch.brand} ${watch.modelName}`,
       text: `Check out this ${watch.brand} ${watch.modelName}`,
@@ -45,6 +47,18 @@ function WatchDetails() {
     } catch (err) {
       console.error('Error sharing:', err);
     }
+  };
+
+  const IncludedStatus = ({ included }) => {
+    return (
+      <span
+        className={`included-status ${
+          included ? 'included-yes' : 'included-no'
+        }`}
+      >
+        {included ? '✓' : '✕'}
+      </span>
+    );
   };
 
   if (loading) {
@@ -82,7 +96,10 @@ function WatchDetails() {
 
         <div className="watch-details-grid">
 
-          {/* IMAGE */}
+          {/* =========================================
+              IMAGE
+          ========================================= */}
+
           <section className="watch-details-image-section">
 
             <button
@@ -90,6 +107,7 @@ function WatchDetails() {
               onClick={() => setImageExpanded(true)}
               type="button"
             >
+
               {watch.imageUrl ? (
                 <img
                   src={watch.imageUrl}
@@ -107,12 +125,19 @@ function WatchDetails() {
                   <span>CLICK TO EXPAND</span>
                 </div>
               )}
+
             </button>
 
           </section>
 
-          {/* DETAILS */}
+
+          {/* =========================================
+              DETAILS
+          ========================================= */}
+
           <section className="watch-details-info-section">
+
+            {/* HEADER */}
 
             <div className="watch-details-header">
 
@@ -136,6 +161,9 @@ function WatchDetails() {
 
             </div>
 
+
+            {/* PRICE / STATUS */}
+
             <div className="details-price-row">
 
               <div>
@@ -144,21 +172,30 @@ function WatchDetails() {
                 </p>
 
                 <p className="details-watch-price">
-                  ₱ {Number(watch.targetSellingPrice).toLocaleString()}
+                  ₱ {Number(
+                    watch.targetSellingPrice || 0
+                  ).toLocaleString()}
                 </p>
               </div>
 
               {watch.status && (
-                <span className={`details-status ${watch.status.toLowerCase()}`}>
+                <span
+                  className={`details-status ${watch.status.toLowerCase()}`}
+                >
                   {watch.status}
                 </span>
               )}
 
             </div>
 
+
             <div className="details-divider" />
 
-            {/* TEMPORARY DESCRIPTION */}
+
+            {/* =========================================
+                DESCRIPTION
+            ========================================= */}
+
             <section className="watch-description-section">
 
               <p className="details-section-label">
@@ -166,50 +203,120 @@ function WatchDetails() {
               </p>
 
               <p className="details-description">
-                Detailed information and collector notes for this
-                timepiece will be available here.
+                {watch.description ||
+                  'Detailed information and collector notes for this timepiece will be available here.'}
               </p>
 
             </section>
 
-            {/* SPECIFICATIONS */}
-            <section className="watch-specifications">
 
-              <p className="details-section-label">
-                SPECIFICATIONS
-              </p>
+            {/* =========================================
+                COMPACT INFORMATION GRID
+            ========================================= */}
 
-              <div className="spec-list">
+            <div className="watch-info-panels">
 
-                <div className="spec-row">
-                  <span>Brand</span>
-                  <strong>{watch.brand}</strong>
+              {/* SPECIFICATIONS */}
+
+              <section className="watch-specifications">
+
+                <p className="details-section-label">
+                  SPECIFICATIONS
+                </p>
+
+                <div className="spec-list">
+
+                  <div className="spec-row">
+                    <span>Brand</span>
+                    <strong>
+                      {watch.brand || 'N/A'}
+                    </strong>
+                  </div>
+
+                  <div className="spec-row">
+                    <span>Model</span>
+                    <strong>
+                      {watch.modelName || 'N/A'}
+                    </strong>
+                  </div>
+
+                  <div className="spec-row">
+                    <span>Reference</span>
+                    <strong>
+                      {watch.referenceNumber || 'N/A'}
+                    </strong>
+                  </div>
+
+                  <div className="spec-row">
+                    <span>Category</span>
+                    <strong>
+                      {watch.category || 'N/A'}
+                    </strong>
+                  </div>
+
+                  <div className="spec-row">
+                    <span>Wrist Size</span>
+                    <strong>
+                      {watch.wristSize || 'N/A'}
+                    </strong>
+                  </div>
+
                 </div>
 
-                <div className="spec-row">
-                  <span>Model</span>
-                  <strong>{watch.modelName}</strong>
+              </section>
+
+
+              {/* INCLUDED ITEMS */}
+
+              <section className="watch-included-section">
+
+                <p className="details-section-label">
+                  INCLUDED
+                </p>
+
+                <div className="included-grid">
+
+                  <div className="included-row">
+                    <span>Inner Box</span>
+                    <IncludedStatus included={watch.innerBox} />
+                  </div>
+
+                  <div className="included-row">
+                    <span>Outer Box</span>
+                    <IncludedStatus included={watch.outerBox} />
+                  </div>
+
+                  <div className="included-row">
+                    <span>Manuals</span>
+                    <IncludedStatus included={watch.manuals} />
+                  </div>
+
+                  <div className="included-row">
+                    <span>Card &amp; Papers</span>
+                    <IncludedStatus included={watch.cardAndPapers} />
+                  </div>
+
+                  <div className="included-row">
+                    <span>Hangtags</span>
+                    <IncludedStatus included={watch.hangtags} />
+                  </div>
+
+                  <div className="included-row">
+                    <span>Full Links</span>
+                    <IncludedStatus included={watch.fullLinks} />
+                  </div>
+
                 </div>
 
-                <div className="spec-row">
-                  <span>Reference</span>
-                  <strong>
-                    {watch.referenceNumber || 'N/A'}
-                  </strong>
-                </div>
+              </section>
 
-                <div className="spec-row">
-                  <span>Category</span>
-                  <strong>
-                    {watch.category || 'N/A'}
-                  </strong>
-                </div>
+            </div>
 
-              </div>
 
-            </section>
+            {/* =========================================
+                ACTIONS
+            ========================================= */}
 
-            {/* ACTION BUTTONS */}
             <div className="watch-actions">
 
               <button
@@ -237,12 +344,18 @@ function WatchDetails() {
 
       </main>
 
-      {/* IMAGE EXPANDED */}
+
+      {/* =========================================
+          IMAGE LIGHTBOX
+      ========================================= */}
+
       {imageExpanded && watch.imageUrl && (
+
         <div
           className="image-lightbox"
           onClick={() => setImageExpanded(false)}
         >
+
           <button
             className="lightbox-close"
             type="button"
@@ -255,7 +368,9 @@ function WatchDetails() {
             src={watch.imageUrl}
             alt={`${watch.brand} ${watch.modelName}`}
           />
+
         </div>
+
       )}
 
     </div>

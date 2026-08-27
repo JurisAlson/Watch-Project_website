@@ -1,12 +1,11 @@
+
 /* =========================================================
    WATCHPROJECT — ADMIN
 ========================================================= */
 
 .admin-page {
   min-height: 100vh;
-
   background: #0d0d0d;
-
   color: #f5f5f5;
 }
 
@@ -17,67 +16,43 @@
 
 .admin-header {
   min-height: 110px;
-
   padding: 30px 50px;
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   gap: 30px;
 }
 
-
 .admin-eyebrow {
   margin: 0 0 8px;
-
   color: #d4af37;
-
   font-size: 0.58rem;
-
   letter-spacing: 2.5px;
-
   text-transform: uppercase;
-
   font-weight: 600;
 }
 
-
 .admin-title {
   margin: 0;
-
   color: #fff;
-
   font-size: 28px;
-
   font-weight: 300;
-
   letter-spacing: 0.5px;
 }
 
-
 .back-to-site {
   color: rgba(255, 255, 255, 0.65);
-
   text-decoration: none;
-
   font-size: 0.65rem;
-
   letter-spacing: 1.5px;
-
   text-transform: uppercase;
-
   transition: 0.2s ease;
 }
 
-
 .back-to-site:hover {
-  color: #fff;
+  color: #d4af37;
 }
 
 
@@ -87,11 +62,8 @@
 
 .admin-content {
   width: 100%;
-
   max-width: 1400px;
-
   margin: 0 auto;
-
   padding: 55px 40px 100px;
 }
 
@@ -102,37 +74,24 @@
 
 .admin-toolbar {
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
   gap: 30px;
-
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
-
 
 .admin-toolbar h2 {
   margin: 0 0 6px;
-
   color: #fff;
-
   font-size: 24px;
-
   font-weight: 300;
-
   letter-spacing: 0.5px;
 }
 
-
 .admin-toolbar p {
   margin: 0;
-
   color: #777;
-
   font-size: 0.72rem;
-
   letter-spacing: 0.5px;
 }
 
@@ -144,9 +103,7 @@
 .add-watch-btn,
 .save-btn {
   border: 1px solid #d4af37;
-
   background: #d4af37;
-
   color: #0d0d0d;
 
   padding: 12px 20px;
@@ -154,28 +111,30 @@
   cursor: pointer;
 
   font-size: 0.62rem;
-
   letter-spacing: 1.5px;
-
   text-transform: uppercase;
 
-  transition: 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
 }
-
 
 .add-watch-btn:hover,
 .save-btn:hover {
-  opacity: 0.82;
+  background: #e2c45c;
+  border-color: #e2c45c;
 }
 
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 .cancel-btn,
 .close-form-btn {
-  border:
-    1px solid rgba(255, 255, 255, 0.18);
-
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background: transparent;
-
   color: rgba(255, 255, 255, 0.75);
 
   padding: 11px 18px;
@@ -183,21 +142,95 @@
   cursor: pointer;
 
   font-size: 0.62rem;
-
   letter-spacing: 1.2px;
-
   text-transform: uppercase;
 
   transition: 0.2s ease;
 }
 
-
 .cancel-btn:hover,
 .close-form-btn:hover {
-  border-color:
-    rgba(255, 255, 255, 0.4);
-
+  border-color: rgba(255, 255, 255, 0.4);
   color: #fff;
+}
+
+.cancel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   INVENTORY FILTERS
+========================================================= */
+
+.inventory-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 25px;
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.inventory-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 0.57rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.inventory-filter-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.inventory-filter-btn.active {
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.06);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.inventory-filter-count {
+  min-width: 18px;
+  height: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  color: #888;
+
+  font-size: 0.5rem;
+}
+
+.inventory-filter-btn.active .inventory-filter-count {
+  background: rgba(212, 175, 55, 0.15);
+  color: #d4af37;
 }
 
 
@@ -207,37 +240,111 @@
 
 .admin-message {
   padding: 14px 18px;
-
   margin-bottom: 25px;
 
-  border:
-    1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   font-size: 0.72rem;
-
   letter-spacing: 0.3px;
 }
 
-
 .admin-message.success {
-  background:
-    rgba(212, 175, 55, 0.06);
-
-  border-color:
-    rgba(212, 175, 55, 0.2);
-
+  background: rgba(212, 175, 55, 0.06);
+  border-color: rgba(212, 175, 55, 0.2);
   color: rgba(255, 255, 255, 0.8);
 }
 
-
 .admin-message.error {
-  background:
-    rgba(180, 50, 50, 0.12);
+  background: rgba(180, 50, 50, 0.12);
+  border-color: rgba(180, 50, 50, 0.3);
+  color: #e19b9b;
+}
 
-  border-color:
-    rgba(180, 50, 50, 0.25);
 
-  color: #d99a9a;
+/* =========================================================
+   FULLSCREEN EDITOR
+========================================================= */
+
+.admin-editor {
+  min-height: 100vh;
+  background: #0d0d0d;
+}
+
+
+/* =========================================================
+   EDITOR HEADER
+========================================================= */
+
+.editor-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  min-height: 100px;
+  padding: 25px 50px;
+
+  background: rgba(13, 13, 13, 0.96);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(12px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.editor-title {
+  margin: 0;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.editor-subtitle {
+  margin: 7px 0 0;
+  color: #666;
+  font-size: 0.68rem;
+  letter-spacing: 0.5px;
+}
+
+.editor-close-btn {
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+
+  color: #777;
+
+  font-size: 1.7rem;
+  font-weight: 200;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.editor-close-btn:hover {
+  color: #d4af37;
+  border-color: rgba(212, 175, 55, 0.45);
+}
+
+
+/* =========================================================
+   EDITOR CONTENT
+========================================================= */
+
+.editor-content {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 55px 40px 120px;
 }
 
 
@@ -245,131 +352,170 @@
    FORM
 ========================================================= */
 
-.admin-form-section {
-  margin-bottom: 50px;
-
-  padding: 32px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.09);
-
-  background: #111111;
-}
-
-
-.form-header {
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content: space-between;
-
-  margin-bottom: 35px;
-}
-
-
-.form-header h2 {
-  margin: 0;
-
-  color: #fff;
-
-  font-size: 25px;
-
-  font-weight: 300;
-
-  letter-spacing: 0.5px;
-}
-
-
 .watch-form {
   width: 100%;
 }
 
-
 .form-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 22px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
 }
-
 
 .form-group {
   display: flex;
-
   flex-direction: column;
-
   gap: 8px;
 }
-
 
 .form-group-full {
   grid-column: 1 / -1;
 }
 
-
 .form-group > label {
   color: rgba(255, 255, 255, 0.52);
 
   font-size: 0.58rem;
-
   letter-spacing: 1.8px;
-
   text-transform: uppercase;
 }
 
+
+/* =========================================================
+   FORM SECTION HEADINGS
+========================================================= */
+
+.form-section-heading {
+  margin-top: 20px;
+  padding-bottom: 5px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.form-section-heading h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+.form-section-heading p:last-child {
+  margin: 8px 0 15px;
+
+  color: #666;
+
+  font-size: 0.68rem;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
 
 .form-group input:not([type="checkbox"]),
 .form-group select,
 .form-group textarea {
   width: 100%;
-
   box-sizing: border-box;
 
-  border:
-    1px solid rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.13);
 
-  background: #0d0d0d;
-
+  background: #0a0a0a;
   color: #fff;
 
-  padding: 13px 14px;
+  padding: 14px;
 
   font-family: inherit;
-
   font-size: 0.78rem;
 
   outline: none;
-
   border-radius: 0;
-}
 
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
 
 .form-group input:not([type="checkbox"]):focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color:
-    rgba(212, 175, 55, 0.55);
+  border-color: rgba(212, 175, 55, 0.55);
+  background: #0c0c0c;
 }
 
+.form-group textarea {
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #555;
+}
 
 .form-group select {
   cursor: pointer;
 }
 
 
-.form-group textarea {
-  resize: vertical;
+/* =========================================================
+   VALIDATION
+========================================================= */
 
-  line-height: 1.7;
+.form-group input.has-error,
+.form-group select.has-error,
+.form-group textarea.has-error {
+  border-color: rgba(210, 70, 70, 0.8);
+}
+
+.form-group input.has-error:focus,
+.form-group select.has-error:focus,
+.form-group textarea.has-error:focus {
+  border-color: #d87979;
+}
+
+.field-error {
+  color: #d87979;
+
+  font-size: 0.58rem;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
 }
 
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: #555;
+/* =========================================================
+   PRICE INPUT
+========================================================= */
+
+.price-input {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.price-input > span {
+  position: absolute;
+
+  left: 14px;
+
+  color: #666;
+
+  font-size: 0.75rem;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+.price-input input {
+  padding-left: 30px !important;
+
+  font-variant-numeric: tabular-nums;
 }
 
 
@@ -379,29 +525,25 @@
 
 .checkbox-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 10px;
 
   margin-top: 4px;
 }
 
-
 .checkbox-item {
   display: flex;
-
   align-items: center;
-
   gap: 10px;
 
-  padding: 13px 14px;
+  min-height: 48px;
 
-  border:
-    1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 14px;
 
-  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  background: #0a0a0a;
 
   cursor: pointer;
 
@@ -409,19 +551,39 @@
 
   color: rgba(255, 255, 255, 0.7);
 
-  transition: 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
-
 
 .checkbox-item:hover {
-  border-color:
-    rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
+.checkbox-item.selected {
+  border-color: rgba(212, 175, 55, 0.55);
+  background: rgba(212, 175, 55, 0.05);
+  color: #d4af37;
+}
+
+.checkbox-item.checkbox-error {
+  border-color: rgba(210, 70, 70, 0.8);
+}
+
+.checkbox-item.disabled,
+.checkbox-item:has(input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.checkbox-item:has(input:disabled):hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
 
 .checkbox-item input {
   width: 15px;
-
   height: 15px;
 
   margin: 0;
@@ -431,9 +593,32 @@
   cursor: pointer;
 }
 
+.checkbox-item input:disabled {
+  cursor: not-allowed;
+}
 
 .checkbox-item span {
-  opacity: 0.85;
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   WRIST SIZE / LINK STATE
+========================================================= */
+
+.wrist-size-note {
+  margin-top: 3px;
+
+  color: #666;
+
+  font-size: 0.58rem;
+  line-height: 1.5;
+}
+
+.auto-selected {
+  border-color: rgba(212, 175, 55, 0.55);
+  background: rgba(212, 175, 55, 0.05);
+  color: #d4af37;
 }
 
 
@@ -441,19 +626,18 @@
    FORM ACTIONS
 ========================================================= */
 
-.form-actions {
+.editor-actions {
   display: flex;
 
   justify-content: flex-end;
 
   gap: 12px;
 
-  margin-top: 30px;
+  margin-top: 45px;
 
   padding-top: 25px;
 
-  border-top:
-    1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 
@@ -465,16 +649,13 @@
   width: 100%;
 }
 
-
 .table-wrapper {
   width: 100%;
 
   overflow-x: auto;
 
-  border:
-    1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.09);
 }
-
 
 .inventory-table {
   width: 100%;
@@ -484,7 +665,6 @@
   min-width: 1100px;
 }
 
-
 .inventory-table th {
   padding: 16px;
 
@@ -493,17 +673,13 @@
   color: #666;
 
   font-size: 0.55rem;
-
   font-weight: 400;
 
   letter-spacing: 1.5px;
-
   text-transform: uppercase;
 
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 
 .inventory-table td {
   padding: 18px 16px;
@@ -512,19 +688,59 @@
 
   font-size: 0.72rem;
 
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-
 
 .inventory-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-
 .inventory-table tbody tr:hover {
-  background:
-    rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+
+/* =========================================================
+   SORT HEADERS
+========================================================= */
+
+.sort-header {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: inherit;
+
+  font: inherit;
+
+  letter-spacing: inherit;
+  text-transform: inherit;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.sort-header span {
+  color: #444;
+
+  font-size: 0.72rem;
+
+  transition: color 0.2s ease;
+}
+
+.sort-header:hover {
+  color: #d4af37;
+}
+
+.sort-header:hover span {
+  color: #d4af37;
 }
 
 
@@ -534,19 +750,16 @@
 
 .table-watch-name {
   display: flex;
-
   flex-direction: column;
 
   gap: 4px;
 }
-
 
 .table-watch-name strong {
   color: #fff;
 
   font-weight: 400;
 }
-
 
 .table-watch-name span {
   color: #777;
@@ -571,18 +784,14 @@
   text-transform: uppercase;
 }
 
-
 .status-pill.available {
-  background:
-    rgba(212, 175, 55, 0.1);
+  background: rgba(212, 175, 55, 0.1);
 
   color: #d4af37;
 }
 
-
 .status-pill.sold {
-  background:
-    rgba(180, 50, 50, 0.15);
+  background: rgba(180, 50, 50, 0.15);
 
   color: #d99a9a;
 }
@@ -600,10 +809,8 @@
   flex-wrap: wrap;
 }
 
-
 .action-btn {
-  border:
-    1px solid rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.13);
 
   background: transparent;
 
@@ -622,13 +829,26 @@
   transition: 0.2s ease;
 }
 
-
 .action-btn:hover {
   background: #fff;
+  color: #0d0d0d;
+}
+
+.action-btn.edit:hover {
+  background: #d4af37;
+
+  border-color: #d4af37;
 
   color: #0d0d0d;
 }
 
+.action-btn.sold-btn:hover {
+  background: #777;
+
+  border-color: #777;
+
+  color: #fff;
+}
 
 .action-btn.delete:hover {
   background: #9b3d3d;
@@ -636,6 +856,94 @@
   border-color: #9b3d3d;
 
   color: #fff;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.inventory-pagination {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 18px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pagination-info {
+  color: #666;
+
+  font-size: 0.62rem;
+
+  letter-spacing: 0.5px;
+}
+
+.pagination-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.pagination-btn {
+  width: 36px;
+  height: 36px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  cursor: pointer;
+
+  font-size: 0.9rem;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: rgba(212, 175, 55, 0.5);
+
+  background: rgba(212, 175, 55, 0.05);
+
+  color: #d4af37;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.25;
+
+  cursor: not-allowed;
+}
+
+.pagination-page {
+  min-width: 60px;
+
+  text-align: center;
+
+  color: #777;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
 }
 
 
@@ -652,7 +960,6 @@
   color: #666;
 }
 
-
 .empty-inventory h3 {
   margin: 0 0 8px;
 
@@ -660,7 +967,6 @@
 
   font-weight: 300;
 }
-
 
 .empty-inventory p {
   margin: 0;
@@ -683,11 +989,9 @@
     flex-direction: column;
   }
 
-
   .admin-content {
     padding: 35px 20px 70px;
   }
-
 
   .admin-toolbar {
     align-items: flex-start;
@@ -695,34 +999,84 @@
     flex-direction: column;
   }
 
-
   .form-grid {
     grid-template-columns: 1fr;
   }
-
 
   .form-group-full {
     grid-column: auto;
   }
 
-
-  .admin-form-section {
-    padding: 20px;
+  .editor-header {
+    padding: 22px 20px;
   }
 
+  .editor-title {
+    font-size: 26px;
+  }
+
+  .editor-content {
+    padding: 35px 20px 80px;
+  }
 
   .checkbox-grid {
     grid-template-columns: 1fr;
   }
 
-
-  .form-actions {
+  .editor-actions {
     flex-direction: column-reverse;
   }
 
-
-  .form-actions button {
+  .editor-actions button {
     width: 100%;
   }
 
+  .inventory-filters {
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding-bottom: 12px;
+  }
+
+  .inventory-filter-btn {
+    flex-shrink: 0;
+  }
+
+  .inventory-pagination {
+    gap: 15px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+  .admin-title {
+    font-size: 23px;
+  }
+
+  .editor-title {
+    font-size: 23px;
+  }
+
+  .editor-close-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .inventory-pagination {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .pagination-controls {
+    width: 100%;
+
+    justify-content: space-between;
+  }
 }

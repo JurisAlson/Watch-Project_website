@@ -21,9 +21,13 @@ public class WatchController {
         this.watchRepository = watchRepository;
     }
 
-    // GET ALL AVAILABLE WATCHES
+    // =========================================
+    // GET ALL PUBLIC WATCHES
+    // =========================================
+
     @GetMapping
     public List<Watch> getAllWatches() {
+
         return watchRepository.findAllByOrderByPublishedDateDesc()
                 .stream()
                 .filter(watch ->
@@ -36,11 +40,16 @@ public class WatchController {
                 .toList();
     }
 
-    // GET ONE WATCH BY ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Watch> getWatchById(@PathVariable Long id) {
+    // =========================================
+    // GET ONE PUBLIC WATCH
+    // =========================================
 
-        Optional<Watch> watchOptional = watchRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Watch> getWatchById(
+            @PathVariable Long id) {
+
+        Optional<Watch> watchOptional =
+                watchRepository.findById(id);
 
         if (watchOptional.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -61,13 +70,19 @@ public class WatchController {
         return ResponseEntity.ok(watch);
     }
 
-    // GET LATEST 5 WATCHES
+    // =========================================
+    // GET LATEST 5 PUBLIC WATCHES
+    // =========================================
+
     @GetMapping("/latest")
     public List<Watch> getLatestWatches() {
 
-        return watchRepository.findAllByOrderByPublishedDateDesc()
+        return watchRepository
+                .findAllByOrderByPublishedDateDesc()
                 .stream()
-                .filter(watch -> watch.getPublishedDate() != null)
+                .filter(watch ->
+                        watch.getPublishedDate() != null
+                )
                 .filter(watch ->
                         !"SOLD".equalsIgnoreCase(watch.getStatus())
                         || watch.getSoldDate() == null

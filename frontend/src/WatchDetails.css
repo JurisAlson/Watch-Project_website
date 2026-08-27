@@ -17,12 +17,11 @@
 
 .watch-details-content {
   width: 100%;
-
-  max-width: 1100px;
+  max-width: 1180px;
 
   margin: 0 auto;
 
-  padding: 110px clamp(24px, 6vw, 80px) 80px;
+  padding: 105px clamp(24px, 5vw, 70px) 70px;
 }
 
 
@@ -30,10 +29,10 @@
   display: grid;
 
   grid-template-columns:
-    1.1fr
-    0.9fr;
+    minmax(0, 1.05fr)
+    minmax(390px, 0.95fr);
 
-  gap: 60px;
+  gap: 55px;
 
   align-items: start;
 }
@@ -47,8 +46,7 @@
   position: relative;
 
   width: 100%;
-
-  min-height: 560px;
+  height: 510px;
 
   padding: 0;
 
@@ -66,14 +64,11 @@
   width: 100%;
   height: 100%;
 
-  min-height: 560px;
-
   object-fit: cover;
 
   display: block;
 
-  transition:
-    transform 0.5s ease;
+  transition: transform 0.5s ease;
 }
 
 
@@ -96,8 +91,7 @@
 
   padding: 8px 12px;
 
-  background:
-    rgba(9, 9, 9, 0.85);
+  background: rgba(9, 9, 9, 0.85);
 
   color: #777;
 
@@ -110,7 +104,8 @@
 
 
 .details-image-placeholder {
-  min-height: 560px;
+  width: 100%;
+  height: 100%;
 
   display: flex;
 
@@ -132,37 +127,35 @@
 ========================================================= */
 
 .watch-details-info-section {
-  padding-top: 5px;
+  padding-top: 2px;
 }
 
 
-/* BACK LINK */
+/* =========================================================
+   CATEGORY
+========================================================= */
 
-.details-back-link {
-  color: #777;
+.gold-tag {
+  margin: 0 0 18px;
 
-  text-decoration: none;
+  color: #d4af37;
 
-  font-size: 0.58rem;
+  font-size: 0.55rem;
 
-  letter-spacing: 1.8px;
+  letter-spacing: 2px;
 
   text-transform: uppercase;
 
-  transition:
-    color 0.25s ease;
+  font-weight: 500;
 }
 
 
-.details-back-link:hover {
-  color: #d4af37;
-}
-
-
-/* BRAND */
+/* =========================================================
+   BRAND
+========================================================= */
 
 .details-watch-brand {
-  margin: 25px 0 10px;
+  margin: 0 0 9px;
 
   color: #d4af37;
 
@@ -176,32 +169,35 @@
 }
 
 
-/* MODEL */
+/* =========================================================
+   MODEL
+========================================================= */
 
 .details-watch-model {
   margin: 0;
 
   color: #fff;
 
-  font-size:
-    clamp(2.2rem, 4vw, 3.8rem);
+  font-size: clamp(2rem, 3.5vw, 3.3rem);
 
   font-weight: 300;
 
-  line-height: 0.98;
+  line-height: 1;
 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 
-/* REFERENCE */
+/* =========================================================
+   REFERENCE
+========================================================= */
 
 .details-watch-reference {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
 
   color: #777;
 
-  font-size: 0.72rem;
+  font-size: 0.68rem;
 
   letter-spacing: 0.5px;
 
@@ -220,19 +216,19 @@
 
   align-items: flex-end;
 
-  gap: 25px;
+  gap: 20px;
 
-  margin-top: 45px;
+  margin-top: 28px;
 }
 
 
 .details-price-label,
 .details-section-label {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
 
   color: #555;
 
-  font-size: 0.58rem;
+  font-size: 0.55rem;
 
   letter-spacing: 1.8px;
 
@@ -247,7 +243,7 @@
 
   color: #fff;
 
-  font-size: 1.35rem;
+  font-size: 1.3rem;
 
   font-weight: 300;
 
@@ -255,19 +251,20 @@
 }
 
 
-/* STATUS */
+/* =========================================================
+   STATUS
+========================================================= */
 
 .details-status {
-  padding: 7px 10px;
+  padding: 6px 9px;
 
-  border:
-    1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.35);
 
   color: #d4af37;
 
-  font-size: 0.55rem;
+  font-size: 0.52rem;
 
-  letter-spacing: 1.4px;
+  letter-spacing: 1.3px;
 
   text-transform: uppercase;
 
@@ -281,12 +278,12 @@
 
 .details-divider {
   width: 100%;
+
   height: 1px;
 
-  margin: 35px 0;
+  margin: 25px 0;
 
-  background:
-    rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 
@@ -295,7 +292,7 @@
 ========================================================= */
 
 .watch-description-section {
-  margin-bottom: 35px;
+  margin-bottom: 24px;
 }
 
 
@@ -304,11 +301,36 @@
 
   color: #888;
 
-  font-size: 0.8rem;
+  font-size: 0.74rem;
 
-  line-height: 1.8;
+  line-height: 1.65;
 
   font-weight: 300;
+
+  white-space: pre-line;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 4;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   INFORMATION PANELS
+========================================================= */
+
+.watch-info-panels {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 25px;
+
+  align-items: start;
 }
 
 
@@ -317,8 +339,7 @@
 ========================================================= */
 
 .spec-list {
-  border-top:
-    1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 
@@ -327,18 +348,19 @@
 
   justify-content: space-between;
 
-  gap: 25px;
+  align-items: center;
 
-  padding: 16px 0;
+  gap: 12px;
 
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.06);
+  min-height: 38px;
 
-  color: #fff;
+  padding: 8px 0;
 
-  font-size: 0.76rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
-  line-height: 1.5;
+  font-size: 0.67rem;
+
+  line-height: 1.4;
 
   font-weight: 300;
 }
@@ -347,9 +369,9 @@
 .spec-row span {
   color: #555;
 
-  font-size: 0.58rem;
+  font-size: 0.52rem;
 
-  letter-spacing: 1.4px;
+  letter-spacing: 1.2px;
 
   text-transform: uppercase;
 
@@ -367,15 +389,105 @@
 
 
 /* =========================================================
+   INCLUDED ITEMS
+========================================================= */
+
+.watch-included-section {
+  margin-top: 0;
+}
+
+
+.included-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.included-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-height: 38px;
+
+  padding: 8px 6px 8px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  color: #888;
+
+  font-size: 0.62rem;
+
+  font-weight: 300;
+}
+
+
+.included-row > span:first-child {
+  color: #555;
+
+  font-size: 0.49rem;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INCLUDED STATUS
+========================================================= */
+
+.included-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 20px;
+  height: 20px;
+
+  font-size: 0.68rem;
+
+  font-weight: 500;
+
+  line-height: 1;
+}
+
+
+.included-yes {
+  color: #d4af37;
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+
+.included-no {
+  color: #555;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
    ACTIONS
 ========================================================= */
 
 .watch-actions {
   display: flex;
 
-  gap: 12px;
+  gap: 10px;
 
-  margin-top: 40px;
+  margin-top: 27px;
 }
 
 
@@ -383,10 +495,9 @@
 .messenger-watch-btn {
   flex: 1;
 
-  padding: 13px 15px;
+  padding: 12px 13px;
 
-  border:
-    1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   background: transparent;
 
@@ -396,9 +507,9 @@
 
   text-align: center;
 
-  font-size: 0.58rem;
+  font-size: 0.54rem;
 
-  letter-spacing: 1.8px;
+  letter-spacing: 1.5px;
 
   text-transform: uppercase;
 
@@ -408,27 +519,22 @@
 
   transition:
     color 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
 
 .share-watch-btn:hover {
   color: #fff;
 
-  border-color:
-    rgba(255, 255, 255, 0.3);
-
-  background: transparent;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 
 .messenger-watch-btn {
-  border-color:
-    rgba(212, 175, 55, 0.45);
+  border-color: rgba(212, 175, 55, 0.45);
 
   color: #d4af37;
-
-  background: transparent;
 }
 
 
@@ -436,8 +542,6 @@
   color: #fff;
 
   border-color: #d4af37;
-
-  opacity: 1;
 }
 
 
@@ -455,12 +559,12 @@
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   padding: 40px;
 
-  background:
-    rgba(0, 0, 0, 0.96);
+  background: rgba(0, 0, 0, 0.96);
 
   cursor: zoom-out;
 }
@@ -468,6 +572,7 @@
 
 .image-lightbox img {
   max-width: 100%;
+
   max-height: 100%;
 
   object-fit: contain;
@@ -492,8 +597,7 @@
 
   cursor: pointer;
 
-  transition:
-    color 0.25s ease;
+  transition: color 0.25s ease;
 }
 
 
@@ -508,7 +612,7 @@
 
 .watch-loading,
 .watch-not-found {
-  padding: 200px 30px;
+  padding: 180px 30px;
 
   text-align: center;
 
@@ -528,8 +632,6 @@
   font-size: 2rem;
 
   font-weight: 300;
-
-  letter-spacing: 0.5px;
 }
 
 
@@ -539,8 +641,6 @@
   color: #777;
 
   font-size: 0.76rem;
-
-  font-weight: 300;
 }
 
 
@@ -556,9 +656,6 @@
   letter-spacing: 1.8px;
 
   text-transform: uppercase;
-
-  transition:
-    letter-spacing 0.25s ease;
 }
 
 
@@ -576,14 +673,12 @@
   .watch-details-grid {
     grid-template-columns: 1fr;
 
-    gap: 45px;
+    gap: 40px;
   }
 
 
-  .watch-main-image,
-  .watch-main-image img,
-  .details-image-placeholder {
-    min-height: 500px;
+  .watch-main-image {
+    height: 500px;
   }
 
 }
@@ -596,21 +691,31 @@
 @media (max-width: 650px) {
 
   .watch-details-content {
-    padding-top: 80px;
+    padding-top: 75px;
 
-    padding-bottom: 60px;
+    padding-bottom: 55px;
   }
 
 
   .watch-details-grid {
-    gap: 35px;
+    gap: 32px;
   }
 
 
-  .watch-main-image,
-  .watch-main-image img,
-  .details-image-placeholder {
-    min-height: 400px;
+  .watch-main-image {
+    height: 400px;
+  }
+
+
+  .watch-info-panels {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+
+  .included-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
 
@@ -624,14 +729,14 @@
 
     flex-direction: column;
 
-    gap: 18px;
+    gap: 15px;
 
-    margin-top: 35px;
+    margin-top: 25px;
   }
 
 
   .details-watch-model {
-    font-size: 2.4rem;
+    font-size: 2.35rem;
   }
 
 

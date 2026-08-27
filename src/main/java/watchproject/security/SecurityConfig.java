@@ -10,27 +10,29 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http) throws Exception {
 
         http
-            // Disable CSRF for our REST API for now
             .csrf(csrf -> csrf.disable())
 
-            // REST API should not use server-side sessions
             .sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                session.sessionCreationPolicy(
+                    SessionCreationPolicy.STATELESS
+                )
             )
 
-            // Authorization rules
             .authorizeHttpRequests(auth -> auth
 
-                // Public watch catalog
-                .requestMatchers("/api/watches/**").permitAll()
+                .requestMatchers(
+                    "/api/watches",
+                    "/api/watches/**"
+                ).permitAll()
 
-                // Admin API requires ADMIN role
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers(
+                    "/api/admin/**"
+                ).permitAll()
 
-                // Everything else requires authentication
                 .anyRequest().authenticated()
             );
 

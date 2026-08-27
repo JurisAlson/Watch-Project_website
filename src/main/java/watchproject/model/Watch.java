@@ -21,14 +21,43 @@ public class Watch {
     private double purchasePrice;
     private double targetSellingPrice;
 
-private String status;
+    private String status;
 
-@Column(columnDefinition = "TEXT")
-private String imageUrl;
+    @Column(columnDefinition = "TEXT")
+    private String imageUrl;
 
-@Column(columnDefinition = "TEXT")
-private String description;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-private LocalDateTime publishedDate;
-private LocalDateTime soldDate;
+    // ================================
+    // INCLUDED ITEMS
+    // ================================
+
+    private boolean innerBox;
+
+    private boolean outerBox;
+
+    private boolean manuals;
+
+    private boolean cardAndPapers;
+
+    private boolean hangtags;
+
+    private boolean fullLinks;
+
+    private boolean missingLinks;
+
+    // ================================
+    // WATCH SIZE
+    // ================================
+
+    private String wristSize;
+
+    // ================================
+    // DATES
+    // ================================
+
+    private LocalDateTime publishedDate;
+
+    private LocalDateTime soldDate;
 }

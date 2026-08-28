@@ -24,21 +24,27 @@ function Navbar() {
 
           <Link
             to="/"
-            className={`navbar-link ${isActive('/') ? 'active' : ''}`}
+            className={`navbar-link ${
+              isActive('/') ? 'active' : ''
+            }`}
           >
             HOME
           </Link>
 
           <Link
             to="/catalog"
-            className={`navbar-link ${isActive('/catalog') ? 'active' : ''}`}
+            className={`navbar-link ${
+              isActive('/catalog') ? 'active' : ''
+            }`}
           >
             CATALOG
           </Link>
 
           <Link
             to="/about"
-            className={`navbar-link ${isActive('/about') ? 'active' : ''}`}
+            className={`navbar-link ${
+              isActive('/about') ? 'active' : ''
+            }`}
           >
             ABOUT
           </Link>
@@ -58,6 +64,36 @@ function Navbar() {
             INQUIRE
           </a>
 
+          {/* PRIVATE ACCESS */}
+          <Link
+            to="/admin/login"
+            className="navbar-admin"
+            title="Private Access"
+            aria-label="Private Access"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8"
+                cy="15"
+                r="4"
+              />
+
+              <path
+                d="M11 12l9-9"
+              />
+
+              <path
+                d="M17 6l2 2"
+              />
+
+              <path
+                d="M14 9l2 2"
+              />
+            </svg>
+          </Link>
         </div>
 
       </div>

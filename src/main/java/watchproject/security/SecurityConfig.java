@@ -1,14 +1,20 @@
-
 package watchproject.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import org.springframework.http.HttpMethod;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -27,7 +33,21 @@ public class SecurityConfig {
     ) throws Exception {
 
         http
+            // =========================================
+            // CORS
+            // =========================================
+
+            .cors(cors -> {})
+
+            // =========================================
+            // CSRF
+            // =========================================
+
             .csrf(csrf -> csrf.disable())
+
+            // =========================================
+            // SESSION
+            // =========================================
 
             .sessionManagement(session ->
                 session.sessionCreationPolicy(
@@ -35,41 +55,59 @@ public class SecurityConfig {
                 )
             )
 
-.authorizeHttpRequests(auth -> auth
+            // =========================================
+            // AUTHORIZATION
+            // =========================================
 
-    .requestMatchers(
-        "/api/auth/login"
-    ).permitAll()
+            .authorizeHttpRequests(auth -> auth
 
-    .requestMatchers(
-        org.springframework.http.HttpMethod.GET,
-        "/api/watches",
-        "/api/watches/**"
-    ).permitAll()
+                // LOGIN — PUBLIC
+                .requestMatchers(
+                    "/api/auth/login"
+                ).permitAll()
 
-    .requestMatchers(
-        org.springframework.http.HttpMethod.POST,
-        "/api/watches",
-        "/api/watches/**"
-    ).hasRole("ADMIN")
+                // PUBLIC WATCH DATA
+                .requestMatchers(
+                    HttpMethod.GET,
+                    "/api/watches",
+                    "/api/watches/**"
+                ).permitAll()
 
-    .requestMatchers(
-        org.springframework.http.HttpMethod.PUT,
-        "/api/watches/**"
-    ).hasRole("ADMIN")
+                // ADMIN — CREATE
+                .requestMatchers(
+                    HttpMethod.POST,
+                    "/api/watches",
+                    "/api/watches/**"
+                ).hasRole("ADMIN")
 
-    .requestMatchers(
-        org.springframework.http.HttpMethod.PATCH,
-        "/api/watches/**"
-    ).hasRole("ADMIN")
+                // ADMIN — UPDATE
+                .requestMatchers(
+                    HttpMethod.PUT,
+                    "/api/watches",
+                    "/api/watches/**"
+                ).hasRole("ADMIN")
 
-    .requestMatchers(
-        org.springframework.http.HttpMethod.DELETE,
-        "/api/watches/**"
-    ).hasRole("ADMIN")
+                // ADMIN — MARK AS SOLD
+                .requestMatchers(
+                    HttpMethod.PATCH,
+                    "/api/watches",
+                    "/api/watches/**"
+                ).hasRole("ADMIN")
 
-    .anyRequest().authenticated()
-)
+                // ADMIN — DELETE
+                .requestMatchers(
+                    HttpMethod.DELETE,
+                    "/api/watches",
+                    "/api/watches/**"
+                ).hasRole("ADMIN")
+
+                // EVERYTHING ELSE
+                .anyRequest().authenticated()
+            )
+
+            // =========================================
+            // JWT FILTER
+            // =========================================
 
             .addFilterBefore(
                 jwtAuthenticationFilter,
@@ -78,5 +116,49 @@ public class SecurityConfig {
 
         return http.build();
     }
-}
 
+
+    // =========================================
+    // CORS CONFIGURATION
+    // =========================================
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+
+        CorsConfiguration configuration =
+            new CorsConfiguration();
+
+        configuration.setAllowedOrigins(
+            List.of(
+                "http://localhost:5173"
+            )
+        );
+
+        configuration.setAllowedMethods(
+            List.of(
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE",
+                "OPTIONS"
+            )
+        );
+
+        configuration.setAllowedHeaders(
+            List.of("*")
+        );
+
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+
+        source.registerCorsConfiguration(
+            "/**",
+            configuration
+        );
+
+        return source;
+    }
+}

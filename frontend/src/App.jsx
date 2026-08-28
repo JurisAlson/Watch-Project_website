@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import './App.css';
 
 import {
@@ -15,9 +16,11 @@ import { AnimatePresence } from 'framer-motion';
 import PageTransition from './PageTransition';
 import Catalog from './Catalog';
 import Admin from './Admin';
+import AdminLogin from './AdminLogin';
 import WatchDetails from './WatchDetails';
 import AboutUs from './AboutUs';
 import Navbar from './Navbar';
+import ProtectedRoute from './ProtectedRoute';
 
 
 function Home() {
@@ -845,14 +848,21 @@ function AnimatedRoutes() {
           }
         />
 
-
         <Route
-          path="/admin"
+          path="/admin/login"
           element={
-            <Admin />
+            <AdminLogin />
           }
         />
 
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        }
+/>
       </Routes>
 
     </AnimatePresence>
@@ -861,23 +871,29 @@ function AnimatedRoutes() {
 
 }
 
+function AppContent() {
 
-/* ========================================
-    APP
-======================================== */
+  const location = useLocation();
+
+const isAdminPage =
+  location.pathname.startsWith('/admin');
+
+  return (
+    <>
+      {!isAdminPage && <Navbar />}
+
+      <AnimatedRoutes />
+    </>
+  );
+}
+
 
 function App() {
 
   return (
-
     <BrowserRouter>
-
-      <Navbar />
-
-      <AnimatedRoutes />
-
+      <AppContent />
     </BrowserRouter>
-
   );
 
 }

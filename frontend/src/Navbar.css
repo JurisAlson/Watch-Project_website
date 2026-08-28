@@ -118,10 +118,9 @@
 
 .navbar-right {
   display: flex;
-
   align-items: center;
+  gap: 18px;
 }
-
 .navbar-contact {
   color: #c5a46d;
 
@@ -181,4 +180,39 @@
     display: none;
   }
 
+}
+/* =========================================================
+   ADMIN LOGIN ICON
+========================================================= */
+
+.navbar-admin {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.navbar-admin svg {
+  width: 16px;
+  height: 16px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.navbar-admin:hover {
+  color: #b89b5e;
+  transform: translateY(-1px);
 }

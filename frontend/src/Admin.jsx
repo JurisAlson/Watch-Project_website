@@ -1,9 +1,17 @@
-
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Admin.css';
 
-const API_URL = 'http://localhost:8080/api/admin/watches';
+const API_URL = 'http://localhost:8080/api/watches';
+
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('adminToken');
+
+  return {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  };
+};
 
 const WATCHES_PER_PAGE = 5;
 
@@ -39,13 +47,11 @@ function Admin() {
 
   const [formMode, setFormMode] = useState(null);
   const [editingId, setEditingId] = useState(null);
-
   const [form, setForm] = useState(emptyForm);
 
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
-
   const [saving, setSaving] = useState(false);
 
   // =========================================================
@@ -85,7 +91,6 @@ function Admin() {
       }
 
       const data = await response.json();
-
       setWatches(data);
     } catch (err) {
       console.error(err);
@@ -111,25 +116,22 @@ function Admin() {
   };
 
   const formatInputPrice = (value) => {
-  // Remove everything except numbers and decimal point
-  const cleaned = value.replace(/[^\d.]/g, '');
+    const cleaned = value.replace(/[^\d.]/g, '');
 
-  // Prevent multiple decimal points
-  const parts = cleaned.split('.');
-  const integerPart = parts[0];
-  const decimalPart = parts[1];
+    const parts = cleaned.split('.');
+    const integerPart = parts[0];
+    const decimalPart = parts[1];
 
-  // Add commas to the integer portion
-  const formattedInteger = integerPart
-    ? Number(integerPart).toLocaleString('en-US')
-    : '';
+    const formattedInteger = integerPart
+      ? Number(integerPart).toLocaleString('en-US')
+      : '';
 
-  if (decimalPart !== undefined) {
-    return `${formattedInteger}.${decimalPart.slice(0, 2)}`;
-  }
+    if (decimalPart !== undefined) {
+      return `${formattedInteger}.${decimalPart.slice(0, 2)}`;
+    }
 
-  return formattedInteger;
-};
+    return formattedInteger;
+  };
 
   // =========================================================
   // FILTER
@@ -187,13 +189,11 @@ function Admin() {
 
       switch (sortConfig.key) {
         case 'name':
-          valueA =
-            `${a.brand || ''} ${a.modelName || ''}`
-              .toLowerCase();
+          valueA = `${a.brand || ''} ${a.modelName || ''}`
+            .toLowerCase();
 
-          valueB =
-            `${b.brand || ''} ${b.modelName || ''}`
-              .toLowerCase();
+          valueB = `${b.brand || ''} ${b.modelName || ''}`
+            .toLowerCase();
 
           return sortConfig.direction === 'asc'
             ? valueA.localeCompare(valueB)
@@ -205,23 +205,13 @@ function Admin() {
           break;
 
         case 'selling':
-          valueA = Number(
-            a.targetSellingPrice || 0
-          );
-
-          valueB = Number(
-            b.targetSellingPrice || 0
-          );
-
+          valueA = Number(a.targetSellingPrice || 0);
+          valueB = Number(b.targetSellingPrice || 0);
           break;
 
         case 'status':
-          valueA =
-            a.status === 'AVAILABLE' ? 0 : 1;
-
-          valueB =
-            b.status === 'AVAILABLE' ? 0 : 1;
-
+          valueA = a.status === 'AVAILABLE' ? 0 : 1;
+          valueB = b.status === 'AVAILABLE' ? 0 : 1;
           break;
 
         default:
@@ -229,25 +219,18 @@ function Admin() {
       }
 
       if (valueA < valueB) {
-        return sortConfig.direction === 'asc'
-          ? -1
-          : 1;
+        return sortConfig.direction === 'asc' ? -1 : 1;
       }
 
       if (valueA > valueB) {
-        return sortConfig.direction === 'asc'
-          ? 1
-          : -1;
+        return sortConfig.direction === 'asc' ? 1 : -1;
       }
 
       return 0;
     });
 
     return sorted;
-  }, [
-    filteredWatches,
-    sortConfig,
-  ]);
+  }, [filteredWatches, sortConfig]);
 
   const getSortIcon = (key) => {
     if (sortConfig.key !== key) {
@@ -260,7 +243,7 @@ function Admin() {
   };
 
   // =========================================================
-  // PAGINATION CALCULATIONS
+  // PAGINATION
   // =========================================================
 
   const totalPages = Math.max(
@@ -272,33 +255,22 @@ function Admin() {
 
   const paginatedWatches = useMemo(() => {
     const startIndex =
-      (currentPage - 1) *
-      WATCHES_PER_PAGE;
+      (currentPage - 1) * WATCHES_PER_PAGE;
 
     return sortedWatches.slice(
       startIndex,
       startIndex + WATCHES_PER_PAGE
     );
-  }, [
-    sortedWatches,
-    currentPage,
-  ]);
+  }, [sortedWatches, currentPage]);
 
-  // Make sure current page never becomes invalid.
   useEffect(() => {
     if (currentPage > totalPages) {
       setCurrentPage(totalPages);
     }
-  }, [
-    currentPage,
-    totalPages,
-  ]);
+  }, [currentPage, totalPages]);
 
   const goToPage = (page) => {
-    if (
-      page < 1 ||
-      page > totalPages
-    ) {
+    if (page < 1 || page > totalPages) {
       return;
     }
 
@@ -334,24 +306,16 @@ function Admin() {
     setForm((previous) => {
       const next = {
         ...previous,
-[name]:
-  type === 'checkbox'
-    ? checked
-    : name === 'purchasePrice' ||
-      name === 'targetSellingPrice'
-      ? formatInputPrice(value)
-      : value,
+        [name]:
+          type === 'checkbox'
+            ? checked
+            : name === 'purchasePrice' ||
+                name === 'targetSellingPrice'
+              ? formatInputPrice(value)
+              : value,
       };
 
-      // -----------------------------------------------------
       // FULL SIZE
-      // -----------------------------------------------------
-      //
-      // FULL SIZE means the bracelet is complete.
-      // Therefore Full Links is automatically selected
-      // and Missing Links is impossible.
-      // -----------------------------------------------------
-
       if (
         name === 'wristSize' &&
         value === 'FULL SIZE'
@@ -360,21 +324,7 @@ function Admin() {
         next.missingLinks = false;
       }
 
-      // -----------------------------------------------------
-      // CHANGING AWAY FROM FULL SIZE
-      // -----------------------------------------------------
-      //
-      // Once another wrist size is selected, Full Links
-      // becomes manually selectable again.
-      //
-      // We do NOT automatically turn it off because the
-      // watch may genuinely have full links at that size.
-      // -----------------------------------------------------
-
-      // -----------------------------------------------------
       // FULL LINKS / MISSING LINKS
-      // -----------------------------------------------------
-
       if (
         name === 'fullLinks' &&
         checked
@@ -407,28 +357,23 @@ function Admin() {
   const validateForm = () => {
     const errors = {};
 
-    const brand =
-      form.brand.trim();
-
-    const modelName =
-      form.modelName.trim();
-
+    const brand = form.brand.trim();
+    const modelName = form.modelName.trim();
     const referenceNumber =
       form.referenceNumber.trim();
 
-    const purchasePrice =
-      Number(form.purchasePrice);
+    const purchasePrice = Number(
+      String(form.purchasePrice).replace(/,/g, '')
+    );
 
-    const sellingPrice =
-      Number(form.targetSellingPrice);
+    const sellingPrice = Number(
+      String(form.targetSellingPrice).replace(/,/g, '')
+    );
 
-    // -------------------------------------------------------
     // BASIC INFORMATION
-    // -------------------------------------------------------
 
     if (!brand) {
-      errors.brand =
-        'Brand is required.';
+      errors.brand = 'Brand is required.';
     }
 
     if (!modelName) {
@@ -446,9 +391,7 @@ function Admin() {
         'Please select a category.';
     }
 
-    // -------------------------------------------------------
     // PRICES
-    // -------------------------------------------------------
 
     if (
       form.purchasePrice === '' ||
@@ -456,9 +399,7 @@ function Admin() {
     ) {
       errors.purchasePrice =
         'Purchase price is required.';
-    } else if (
-      purchasePrice < 0
-    ) {
+    } else if (purchasePrice < 0) {
       errors.purchasePrice =
         'Purchase price cannot be negative.';
     }
@@ -469,49 +410,36 @@ function Admin() {
     ) {
       errors.targetSellingPrice =
         'Selling price is required.';
-    } else if (
-      sellingPrice < 0
-    ) {
+    } else if (sellingPrice < 0) {
       errors.targetSellingPrice =
         'Selling price cannot be negative.';
     }
 
-    // -------------------------------------------------------
     // STATUS
-    // -------------------------------------------------------
 
     if (!form.status) {
-      errors.status =
-        'Status is required.';
+      errors.status = 'Status is required.';
     }
 
-    // -------------------------------------------------------
     // IMAGE URL
-    // -------------------------------------------------------
 
     if (form.imageUrl.trim()) {
       try {
-        new URL(
-          form.imageUrl.trim()
-        );
+        new URL(form.imageUrl.trim());
       } catch {
         errors.imageUrl =
           'Please enter a valid image URL.';
       }
     }
 
-    // -------------------------------------------------------
     // WRIST SIZE
-    // -------------------------------------------------------
 
     if (!form.wristSize) {
       errors.wristSize =
         'Please select a wrist size.';
     }
 
-    // -------------------------------------------------------
     // FULL SIZE RULE
-    // -------------------------------------------------------
 
     if (
       form.wristSize === 'FULL SIZE' &&
@@ -521,9 +449,7 @@ function Admin() {
         'Full Size cannot have Missing Links.';
     }
 
-    // -------------------------------------------------------
     // GENERAL LINK RULE
-    // -------------------------------------------------------
 
     if (
       form.fullLinks &&
@@ -535,9 +461,7 @@ function Admin() {
 
     setValidationErrors(errors);
 
-    return (
-      Object.keys(errors).length === 0
-    );
+    return Object.keys(errors).length === 0;
   };
 
   // =========================================================
@@ -546,10 +470,7 @@ function Admin() {
 
   const openCreateForm = () => {
     setEditingId(null);
-
-    setForm({
-      ...emptyForm,
-    });
+    setForm({ ...emptyForm });
 
     setMessage('');
     setError('');
@@ -574,23 +495,27 @@ function Admin() {
       watch.wristSize || '';
 
     setForm({
-      brand:
-        watch.brand || '',
-
-      modelName:
-        watch.modelName || '',
-
+      brand: watch.brand || '',
+      modelName: watch.modelName || '',
       referenceNumber:
         watch.referenceNumber || '',
-
-      category:
-        watch.category || '',
+      category: watch.category || '',
 
       purchasePrice:
-        watch.purchasePrice ?? '',
+        watch.purchasePrice !== null &&
+        watch.purchasePrice !== undefined
+          ? formatInputPrice(
+              String(watch.purchasePrice)
+            )
+          : '',
 
       targetSellingPrice:
-        watch.targetSellingPrice ?? '',
+        watch.targetSellingPrice !== null &&
+        watch.targetSellingPrice !== undefined
+          ? formatInputPrice(
+              String(watch.targetSellingPrice)
+            )
+          : '',
 
       status:
         watch.status || 'AVAILABLE',
@@ -648,9 +573,7 @@ function Admin() {
   const cancelForm = () => {
     setFormMode(null);
     setEditingId(null);
-    setForm({
-      ...emptyForm,
-    });
+    setForm({ ...emptyForm });
 
     setValidationErrors({});
     setError('');
@@ -680,47 +603,35 @@ function Admin() {
     setError('');
 
     const payload = {
-      brand:
-        form.brand.trim(),
-
-      modelName:
-        form.modelName.trim(),
-
+      brand: form.brand.trim(),
+      modelName: form.modelName.trim(),
       referenceNumber:
         form.referenceNumber.trim(),
 
-      category:
-        form.category,
+      category: form.category,
 
-      purchasePrice:
-        Number(form.purchasePrice),
+    purchasePrice:
+      Number(
+        String(form.purchasePrice).replace(/,/g, '')
+      ),
 
-      targetSellingPrice:
-        Number(form.targetSellingPrice),
+    targetSellingPrice:
+      Number(
+        String(form.targetSellingPrice).replace(/,/g, '')
+      ),
 
-      status:
-        form.status,
+      status: form.status,
 
-      imageUrl:
-        form.imageUrl.trim(),
+      imageUrl: form.imageUrl.trim(),
 
       description:
         form.description.trim(),
 
-      innerBox:
-        form.innerBox,
-
-      outerBox:
-        form.outerBox,
-
-      manuals:
-        form.manuals,
-
-      cardAndPapers:
-        form.cardAndPapers,
-
-      hangtags:
-        form.hangtags,
+      innerBox: form.innerBox,
+      outerBox: form.outerBox,
+      manuals: form.manuals,
+      cardAndPapers: form.cardAndPapers,
+      hangtags: form.hangtags,
 
       fullLinks:
         form.wristSize === 'FULL SIZE'
@@ -732,8 +643,7 @@ function Admin() {
           ? false
           : form.missingLinks,
 
-      wristSize:
-        form.wristSize,
+      wristSize: form.wristSize,
     };
 
     try {
@@ -748,16 +658,11 @@ function Admin() {
         ? 'PUT'
         : 'POST';
 
-      const response =
-        await fetch(url, {
-          method,
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-          body:
-            JSON.stringify(payload),
-        });
+const response = await fetch(url, {
+  method,
+  headers: getAuthHeaders(),
+  body: JSON.stringify(payload),
+});
 
       const responseText =
         await response.text();
@@ -781,14 +686,10 @@ function Admin() {
 
       setFormMode(null);
       setEditingId(null);
-      setForm({
-        ...emptyForm,
-      });
-
+      setForm({ ...emptyForm });
       setValidationErrors({});
 
       await loadWatches();
-
     } catch (err) {
       console.error(
         'SAVE ERROR:',
@@ -797,9 +698,8 @@ function Admin() {
 
       setError(
         err.message ||
-        'Unable to save watch.'
+          'Unable to save watch.'
       );
-
     } finally {
       setSaving(false);
     }
@@ -820,14 +720,17 @@ function Admin() {
     }
 
     try {
-      const response =
-        await fetch(
+        const token = localStorage.getItem('adminToken');
+
+        const response = await fetch(
           `${API_URL}/${id}/sold`,
           {
             method: 'PATCH',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
-
       if (!response.ok) {
         throw new Error(
           'Unable to mark watch as sold.'
@@ -841,7 +744,6 @@ function Admin() {
       setError('');
 
       await loadWatches();
-
     } catch (err) {
       console.error(err);
 
@@ -851,51 +753,50 @@ function Admin() {
     }
   };
 
-  // =========================================================
-  // DELETE
-  // =========================================================
+// =========================================================
+// DELETE
+// =========================================================
 
-  const deleteWatch = async (id) => {
-    const confirmed =
-      window.confirm(
-        'Delete this watch permanently? This cannot be undone.'
-      );
+const deleteWatch = async (id) => {
+  const confirmed = window.confirm(
+    'Delete this watch permanently? This cannot be undone.'
+  );
 
-    if (!confirmed) {
-      return;
-    }
+  if (!confirmed) {
+    return;
+  }
 
-    try {
-      const response =
-        await fetch(
-          `${API_URL}/${id}`,
-          {
-            method: 'DELETE',
-          }
-        );
+  try {
+    const token = localStorage.getItem('adminToken');
 
-      if (!response.ok) {
-        throw new Error(
-          'Unable to delete watch.'
-        );
+    const response = await fetch(
+      `${API_URL}/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
+    );
 
-      setMessage(
-        'Watch deleted.'
-      );
-
-      setError('');
-
-      await loadWatches();
-
-    } catch (err) {
-      console.error(err);
-
-      setError(
+    if (!response.ok) {
+      throw new Error(
         'Unable to delete watch.'
       );
     }
-  };
+
+    setMessage('Watch deleted.');
+    setError('');
+
+    await loadWatches();
+  } catch (err) {
+    console.error(err);
+
+    setError(
+      'Unable to delete watch.'
+    );
+  }
+};
 
   // =========================================================
   // FIELD ERROR HELPER
@@ -961,9 +862,7 @@ function Admin() {
 
           <main className="admin-content">
 
-            {/* =================================================
-                TOOLBAR
-            ================================================= */}
+            {/* TOOLBAR */}
 
             <section className="admin-toolbar">
 
@@ -989,9 +888,7 @@ function Admin() {
 
             </section>
 
-            {/* =================================================
-                INVENTORY FILTER
-            ================================================= */}
+            {/* INVENTORY FILTER */}
 
             <section className="inventory-filters">
 
@@ -1006,10 +903,7 @@ function Admin() {
                   handleFilterChange('ALL')
                 }
               >
-                <span>
-                  All
-                </span>
-
+                <span>All</span>
                 <strong>
                   {watches.length}
                 </strong>
@@ -1028,10 +922,7 @@ function Admin() {
                   )
                 }
               >
-                <span>
-                  Available
-                </span>
-
+                <span>Available</span>
                 <strong>
                   {availableCount}
                 </strong>
@@ -1048,10 +939,7 @@ function Admin() {
                   handleFilterChange('SOLD')
                 }
               >
-                <span>
-                  Sold
-                </span>
-
+                <span>Sold</span>
                 <strong>
                   {soldCount}
                 </strong>
@@ -1059,9 +947,7 @@ function Admin() {
 
             </section>
 
-            {/* =================================================
-                MESSAGES
-            ================================================= */}
+            {/* MESSAGES */}
 
             {message && (
               <div className="admin-message success">
@@ -1075,9 +961,7 @@ function Admin() {
               </div>
             )}
 
-            {/* =================================================
-                INVENTORY
-            ================================================= */}
+            {/* INVENTORY */}
 
             <section className="inventory-table-section">
 
@@ -1115,15 +999,11 @@ function Admin() {
                     <table className="inventory-table">
 
                       <thead>
-
                         <tr>
 
-                          <th>
-                            ID
-                          </th>
+                          <th>ID</th>
 
                           <th>
-
                             <button
                               type="button"
                               className="sort-header"
@@ -1132,12 +1012,10 @@ function Admin() {
                               }
                             >
                               Watch
-
                               <span>
                                 {getSortIcon('name')}
                               </span>
                             </button>
-
                           </th>
 
                           <th>
@@ -1149,7 +1027,6 @@ function Admin() {
                           </th>
 
                           <th>
-
                             <button
                               type="button"
                               className="sort-header"
@@ -1160,18 +1037,15 @@ function Admin() {
                               }
                             >
                               Purchase
-
                               <span>
                                 {getSortIcon(
                                   'purchase'
                                 )}
                               </span>
                             </button>
-
                           </th>
 
                           <th>
-
                             <button
                               type="button"
                               className="sort-header"
@@ -1182,18 +1056,15 @@ function Admin() {
                               }
                             >
                               Selling
-
                               <span>
                                 {getSortIcon(
                                   'selling'
                                 )}
                               </span>
                             </button>
-
                           </th>
 
                           <th>
-
                             <button
                               type="button"
                               className="sort-header"
@@ -1204,14 +1075,12 @@ function Admin() {
                               }
                             >
                               Availability
-
                               <span>
                                 {getSortIcon(
                                   'status'
                                 )}
                               </span>
                             </button>
-
                           </th>
 
                           <th>
@@ -1223,14 +1092,12 @@ function Admin() {
                           </th>
 
                         </tr>
-
                       </thead>
 
                       <tbody>
 
                         {paginatedWatches.map(
                           (watch) => (
-
                             <tr
                               key={watch.id}
                             >
@@ -1240,9 +1107,7 @@ function Admin() {
                               </td>
 
                               <td>
-
                                 <div className="table-watch-name">
-
                                   <strong>
                                     {watch.brand}
                                   </strong>
@@ -1250,9 +1115,7 @@ function Admin() {
                                   <span>
                                     {watch.modelName}
                                   </span>
-
                                 </div>
-
                               </td>
 
                               <td>
@@ -1260,7 +1123,8 @@ function Admin() {
                               </td>
 
                               <td>
-                                {watch.category || '—'}
+                                {watch.category ||
+                                  '—'}
                               </td>
 
                               <td>
@@ -1270,23 +1134,23 @@ function Admin() {
                               </td>
 
                               <td>
-                                ₱{formatPrice(
+                                ₱
+                                {formatPrice(
                                   watch.targetSellingPrice
                                 )}
                               </td>
 
                               <td>
-
                                 <span
                                   className={`status-pill ${
-                                    watch.status === 'SOLD'
+                                    watch.status ===
+                                    'SOLD'
                                       ? 'sold'
                                       : 'available'
                                   }`}
                                 >
                                   {watch.status}
                                 </span>
-
                               </td>
 
                               <td>
@@ -1298,7 +1162,6 @@ function Admin() {
                               </td>
 
                               <td>
-
                                 <div className="table-actions">
 
                                   <button
@@ -1315,7 +1178,6 @@ function Admin() {
 
                                   {watch.status !==
                                     'SOLD' && (
-
                                     <button
                                       type="button"
                                       onClick={() =>
@@ -1327,7 +1189,6 @@ function Admin() {
                                     >
                                       Sold
                                     </button>
-
                                   )}
 
                                   <button
@@ -1343,11 +1204,9 @@ function Admin() {
                                   </button>
 
                                 </div>
-
                               </td>
 
                             </tr>
-
                           )
                         )}
 
@@ -1357,12 +1216,9 @@ function Admin() {
 
                   </div>
 
-                  {/* =================================================
-                      PAGINATION
-                  ================================================= */}
+                  {/* PAGINATION */}
 
                   {totalPages > 1 && (
-
                     <div className="inventory-pagination">
 
                       <button
@@ -1417,11 +1273,9 @@ function Admin() {
                       </button>
 
                     </div>
-
                   )}
 
                 </>
-
               )}
 
             </section>
@@ -1435,7 +1289,6 @@ function Admin() {
       ===================================================== */}
 
       {formMode && (
-
         <div className="admin-editor">
 
           <header className="editor-header">
@@ -1488,9 +1341,7 @@ function Admin() {
 
               <div className="form-grid">
 
-                {/* =================================================
-                    BASIC INFORMATION
-                ================================================= */}
+                {/* BASIC INFORMATION */}
 
                 <div className="form-section-heading form-group-full">
 
@@ -1731,9 +1582,7 @@ function Admin() {
 
                 </div>
 
-                {/* =================================================
-                    PRICING
-                ================================================= */}
+                {/* PRICING */}
 
                 <div className="form-section-heading form-group-full">
 
@@ -1825,9 +1674,7 @@ function Admin() {
 
                 </div>
 
-                {/* =================================================
-                    IMAGE
-                ================================================= */}
+                {/* IMAGE */}
 
                 <div className="form-section-heading form-group-full">
 
@@ -1866,9 +1713,7 @@ function Admin() {
 
                 </div>
 
-                {/* =================================================
-                    INCLUDED ITEMS
-                ================================================= */}
+                {/* INCLUDED ITEMS */}
 
                 <div className="form-section-heading form-group-full">
 
@@ -1881,8 +1726,8 @@ function Admin() {
                   </h2>
 
                   <p>
-                    Select everything included with
-                    the watch.
+                    Select everything included
+                    with the watch.
                   </p>
 
                 </div>
@@ -2034,13 +1879,12 @@ function Admin() {
 
                   {form.wristSize ===
                     'FULL SIZE' && (
-
                     <small className="field-hint">
-                      Full Size automatically includes
-                      Full Links. Missing Links cannot
-                      be selected.
+                      Full Size automatically
+                      includes Full Links.
+                      Missing Links cannot be
+                      selected.
                     </small>
-
                   )}
 
                   {validationErrors.fullLinks && (
@@ -2063,9 +1907,7 @@ function Admin() {
 
                 </div>
 
-                {/* =================================================
-                    DESCRIPTION
-                ================================================= */}
+                {/* DESCRIPTION */}
 
                 <div className="form-section-heading form-group-full">
 
@@ -2097,9 +1939,7 @@ function Admin() {
 
               </div>
 
-              {/* =================================================
-                  ACTIONS
-              ================================================= */}
+              {/* ACTIONS */}
 
               <div className="editor-actions">
 
@@ -2138,4 +1978,3 @@ function Admin() {
 }
 
 export default Admin;
-

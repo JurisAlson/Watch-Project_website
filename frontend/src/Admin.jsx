@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Admin.css';
 
 const API_URL = 'http://localhost:8080/api/watches';
@@ -38,8 +38,15 @@ const emptyForm = {
 };
 
 function Admin() {
+  const navigate = useNavigate();
+
   const [watches, setWatches] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    navigate('/admin/login', { replace: true });
+  };
 
   // =========================================================
   // FORM MODE
@@ -80,25 +87,32 @@ function Admin() {
   // =========================================================
 
   const loadWatches = async () => {
-    setLoading(true);
-    setError('');
+  setLoading(true);
+  setError('');
 
-    try {
-      const response = await fetch(API_URL);
-
-      if (!response.ok) {
-        throw new Error('Failed to load inventory.');
+  try {
+    const response = await fetch(
+      ADMIN_API_URL,
+      {
+        headers: getAuthHeaders(),
       }
+    );
 
-      const data = await response.json();
-      setWatches(data);
-    } catch (err) {
-      console.error(err);
-      setError('Unable to load inventory.');
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      throw new Error('Failed to load inventory.');
     }
-  };
+
+    const data = await response.json();
+    setWatches(data);
+
+  } catch (err) {
+    console.error(err);
+    setError('Unable to load inventory.');
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     loadWatches();
@@ -851,12 +865,24 @@ const deleteWatch = async (id) => {
               </h1>
             </div>
 
-            <Link
-              to="/"
-              className="back-to-site"
-            >
-              ← Back to Website
-            </Link>
+<div className="admin-header-actions">
+
+  <button
+    type="button"
+    onClick={handleLogout}
+    className="admin-logout-btn"
+  >
+    LOG OUT
+  </button>
+
+  <Link
+    to="/"
+    className="back-to-site"
+  >
+    ← Back to Website
+  </Link>
+
+</div>
 
           </header>
 

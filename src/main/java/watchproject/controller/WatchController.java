@@ -2,6 +2,7 @@ package watchproject.controller;
 
 import watchproject.model.Watch;
 import watchproject.repository.WatchRepository;
+import watchproject.dto.PublicWatchDTO;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class WatchController {
     // =========================================
 
     @GetMapping
-    public List<Watch> getAllWatches() {
+    public List<PublicWatchDTO> getAllWatches() {
 
         return watchRepository.findAllByOrderByPublishedDateDesc()
                 .stream()
@@ -37,15 +38,31 @@ public class WatchController {
                                 LocalDateTime.now().minusDays(30)
                         )
                 )
+                .map(PublicWatchDTO::from)
                 .toList();
     }
+
+    // =========================================
+    // GET ALL WATCHES — ADMIN
+    // =========================================
+    // This endpoint returns the full Watch entity,
+    // including purchasePrice.
+    //
+    // It MUST be protected by Spring Security.
+
+    @GetMapping("/admin/all")
+    public List<Watch> getAllWatchesForAdmin() {
+
+        return watchRepository.findAllByOrderByPublishedDateDesc();
+    }
+
 
     // =========================================
     // GET ONE PUBLIC WATCH
     // =========================================
 
     @GetMapping("/{id}")
-    public ResponseEntity<Watch> getWatchById(
+    public ResponseEntity<PublicWatchDTO> getWatchById(
             @PathVariable Long id) {
 
         Optional<Watch> watchOptional =
@@ -67,7 +84,9 @@ public class WatchController {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(watch);
+        return ResponseEntity.ok(
+                PublicWatchDTO.from(watch)
+        );
     }
 
     // =========================================
@@ -75,7 +94,7 @@ public class WatchController {
     // =========================================
 
     @GetMapping("/latest")
-    public List<Watch> getLatestWatches() {
+    public List<PublicWatchDTO> getLatestWatches() {
 
         return watchRepository
                 .findAllByOrderByPublishedDateDesc()
@@ -91,6 +110,7 @@ public class WatchController {
                         )
                 )
                 .limit(5)
+                .map(PublicWatchDTO::from)
                 .toList();
     }
 
@@ -108,10 +128,12 @@ public class WatchController {
 
         if ("SOLD".equalsIgnoreCase(watch.getStatus())
                 && watch.getSoldDate() == null) {
+
             watch.setSoldDate(LocalDateTime.now());
         }
 
-        Watch savedWatch = watchRepository.save(watch);
+        Watch savedWatch =
+                watchRepository.save(watch);
 
         return ResponseEntity.ok(savedWatch);
     }
@@ -136,58 +158,96 @@ public class WatchController {
 
         watch.setBrand(updatedWatch.getBrand());
         watch.setModelName(updatedWatch.getModelName());
-        watch.setReferenceNumber(updatedWatch.getReferenceNumber());
+        watch.setReferenceNumber(
+                updatedWatch.getReferenceNumber()
+        );
         watch.setCategory(updatedWatch.getCategory());
 
-        watch.setPurchasePrice(updatedWatch.getPurchasePrice());
+        watch.setPurchasePrice(
+                updatedWatch.getPurchasePrice()
+        );
+
         watch.setTargetSellingPrice(
                 updatedWatch.getTargetSellingPrice()
         );
 
         watch.setStatus(updatedWatch.getStatus());
 
-        watch.setImageUrl(updatedWatch.getImageUrl());
-        watch.setDescription(updatedWatch.getDescription());
+        watch.setImageUrl(
+                updatedWatch.getImageUrl()
+        );
+
+        watch.setDescription(
+                updatedWatch.getDescription()
+        );
 
         // =========================================
         // INCLUDED ITEMS
         // =========================================
 
-        watch.setInnerBox(updatedWatch.isInnerBox());
-        watch.setOuterBox(updatedWatch.isOuterBox());
-        watch.setManuals(updatedWatch.isManuals());
-        watch.setCardAndPapers(updatedWatch.isCardAndPapers());
-        watch.setHangtags(updatedWatch.isHangtags());
-        watch.setFullLinks(updatedWatch.isFullLinks());
-        watch.setMissingLinks(updatedWatch.isMissingLinks());
+        watch.setInnerBox(
+                updatedWatch.isInnerBox()
+        );
+
+        watch.setOuterBox(
+                updatedWatch.isOuterBox()
+        );
+
+        watch.setManuals(
+                updatedWatch.isManuals()
+        );
+
+        watch.setCardAndPapers(
+                updatedWatch.isCardAndPapers()
+        );
+
+        watch.setHangtags(
+                updatedWatch.isHangtags()
+        );
+
+        watch.setFullLinks(
+                updatedWatch.isFullLinks()
+        );
+
+        watch.setMissingLinks(
+                updatedWatch.isMissingLinks()
+        );
 
         // =========================================
         // WATCH SIZE
         // =========================================
 
-        watch.setWristSize(updatedWatch.getWristSize());
+        watch.setWristSize(
+                updatedWatch.getWristSize()
+        );
 
         // =========================================
         // DATES
         // =========================================
 
         if (updatedWatch.getPublishedDate() != null) {
+
             watch.setPublishedDate(
                     updatedWatch.getPublishedDate()
             );
         }
 
-        if ("SOLD".equalsIgnoreCase(updatedWatch.getStatus())) {
+        if ("SOLD".equalsIgnoreCase(
+                updatedWatch.getStatus())) {
 
             if (watch.getSoldDate() == null) {
-                watch.setSoldDate(LocalDateTime.now());
+                watch.setSoldDate(
+                        LocalDateTime.now()
+                );
             }
 
         } else {
+
             watch.setSoldDate(null);
         }
 
-        Watch savedWatch = watchRepository.save(watch);
+        Watch savedWatch =
+                watchRepository.save(watch);
 
         return ResponseEntity.ok(savedWatch);
     }
@@ -212,7 +272,8 @@ public class WatchController {
         watch.setStatus("SOLD");
         watch.setSoldDate(LocalDateTime.now());
 
-        Watch savedWatch = watchRepository.save(watch);
+        Watch savedWatch =
+                watchRepository.save(watch);
 
         return ResponseEntity.ok(savedWatch);
     }

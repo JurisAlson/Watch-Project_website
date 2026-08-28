@@ -61,49 +61,54 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
 
-                // LOGIN — PUBLIC
-                .requestMatchers(
-                    "/api/auth/login"
-                ).permitAll()
+    // LOGIN — PUBLIC
+    .requestMatchers(
+        "/api/auth/login"
+    ).permitAll()
 
-                // PUBLIC WATCH DATA
-                .requestMatchers(
-                    HttpMethod.GET,
-                    "/api/watches",
-                    "/api/watches/**"
-                ).permitAll()
+    // ADMIN — GET ALL WATCHES
+    .requestMatchers(
+        HttpMethod.GET,
+        "/api/watches/admin/all"
+    ).hasRole("ADMIN")
 
-                // ADMIN — CREATE
-                .requestMatchers(
-                    HttpMethod.POST,
-                    "/api/watches",
-                    "/api/watches/**"
-                ).hasRole("ADMIN")
+    // PUBLIC WATCH DATA
+    .requestMatchers(
+        HttpMethod.GET,
+        "/api/watches",
+        "/api/watches/**"
+    ).permitAll()
 
-                // ADMIN — UPDATE
-                .requestMatchers(
-                    HttpMethod.PUT,
-                    "/api/watches",
-                    "/api/watches/**"
-                ).hasRole("ADMIN")
+    // ADMIN — CREATE
+    .requestMatchers(
+        HttpMethod.POST,
+        "/api/watches",
+        "/api/watches/**"
+    ).hasRole("ADMIN")
 
-                // ADMIN — MARK AS SOLD
-                .requestMatchers(
-                    HttpMethod.PATCH,
-                    "/api/watches",
-                    "/api/watches/**"
-                ).hasRole("ADMIN")
+    // ADMIN — UPDATE
+    .requestMatchers(
+        HttpMethod.PUT,
+        "/api/watches",
+        "/api/watches/**"
+    ).hasRole("ADMIN")
 
-                // ADMIN — DELETE
-                .requestMatchers(
-                    HttpMethod.DELETE,
-                    "/api/watches",
-                    "/api/watches/**"
-                ).hasRole("ADMIN")
+    // ADMIN — MARK AS SOLD
+    .requestMatchers(
+        HttpMethod.PATCH,
+        "/api/watches",
+        "/api/watches/**"
+    ).hasRole("ADMIN")
 
-                // EVERYTHING ELSE
-                .anyRequest().authenticated()
-            )
+    // ADMIN — DELETE
+    .requestMatchers(
+        HttpMethod.DELETE,
+        "/api/watches",
+        "/api/watches/**"
+    ).hasRole("ADMIN")
+
+    .anyRequest().authenticated()
+)
 
             // =========================================
             // JWT FILTER

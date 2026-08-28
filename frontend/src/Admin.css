@@ -858,6 +858,36 @@
   color: #fff;
 }
 
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  color: rgba(255, 255, 255, 0.55);
+
+  padding: 10px 16px;
+
+  font-size: 9px;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.admin-logout-btn:hover {
+  color: #fff;
+  border-color: rgba(197, 164, 109, 0.6);
+  background: rgba(197, 164, 109, 0.08);
+}
 
 /* =========================================================
    PAGINATION

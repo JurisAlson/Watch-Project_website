@@ -133,10 +133,13 @@ public class SecurityConfig {
         CorsConfiguration configuration =
             new CorsConfiguration();
 
+        String frontendUrl = System.getenv().getOrDefault(
+            "FRONTEND_URL",
+            "http://localhost:5173"
+        );
+
         configuration.setAllowedOrigins(
-            List.of(
-                "http://localhost:5173"
-            )
+            List.of(frontendUrl)
         );
 
         configuration.setAllowedMethods(

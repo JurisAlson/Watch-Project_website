@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/watches")
-@CrossOrigin(origins = "http://localhost:5173")
 public class WatchController {
 
     private final WatchRepository watchRepository;

@@ -40,7 +40,7 @@ function Home() {
 
   useEffect(() => {
 
-    fetch('http://localhost:8080/api/watches/latest')
+    fetch(`${import.meta.env.VITE_API_URL}/api/watches/latest`)
 
       .then((res) => {
 

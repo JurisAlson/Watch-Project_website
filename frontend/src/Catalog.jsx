@@ -9,7 +9,7 @@ function Catalog() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/watches')
+    fetch(`${import.meta.env.VITE_API_URL}/api/watches`)
       .then((res) => res.json())
       .then((data) => {
         setWatches(data);

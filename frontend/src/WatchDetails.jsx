@@ -10,7 +10,7 @@ function WatchDetails() {
   const [imageExpanded, setImageExpanded] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/watches/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/watches/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Watch not found');

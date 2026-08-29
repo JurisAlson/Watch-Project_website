@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Admin.css';
 
-const API_URL = 'http://localhost:8080/api/watches';
-const ADMIN_API_URL = 'http://localhost:8080/api/watches/admin/all';
+const API_URL = `${import.meta.env.VITE_API_URL}/api/watches`;
+const ADMIN_API_URL = `${import.meta.env.VITE_API_URL}/api/watches/admin/all`;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('adminToken');

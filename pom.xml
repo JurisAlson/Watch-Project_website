@@ -70,6 +70,13 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+<!-- H2 database for tests -->
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+</dependency>
+
         <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>

@@ -318,7 +318,7 @@ function Home() {
           <h2>
             FIND YOUR
             <br />
-            REFERENCE.
+            PREFERENCE.
           </h2>
 
           <p>

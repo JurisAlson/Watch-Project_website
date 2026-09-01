@@ -94,11 +94,6 @@ function AdminLogin() {
           <h1>
             ADMINISTRATION
           </h1>
-
-          <p className="admin-login-subtitle">
-            Private access to the WatchProject inventory.
-          </p>
-
         </div>
 
 
@@ -164,7 +159,7 @@ function AdminLogin() {
 
             {loading
               ? 'AUTHENTICATING...'
-              : 'ENTER ADMINISTRATION →'
+              : 'LOGIN'
             }
 
           </button>

@@ -138,9 +138,12 @@ public class SecurityConfig {
             "http://localhost:5173"
         );
 
-        configuration.setAllowedOrigins(
-            List.of(frontendUrl)
-        );
+configuration.setAllowedOrigins(
+    List.of(
+        "https://watch-project-website.app",
+        "https://watch-project-website-jurisalson.vercel.app"
+    )
+);
 
         configuration.setAllowedMethods(
             List.of(
